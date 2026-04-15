@@ -1,1 +1,4 @@
-jupyterlab-citation-manager==1.0.0
+warcio=1.17.0
+matplotlib=3.10.8
+pandas=3.0.1
+dataframe_image=0.2.7
