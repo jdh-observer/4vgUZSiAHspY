@@ -163,7 +163,7 @@ The resulting corpus from querying the Internet Archive for these 85 URLs with t
 
 <!-- #endregion -->
 
-```python editable=true slideshow={"slide_type": ""} tags=["hermeneutics"]
+```python editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "figure-1"]
 from IPython.display import Image, display
 metadata={
     "jdh": {
@@ -388,7 +388,7 @@ The individual categories often return a multitude of matches. The real value of
 As mentioned in the beginning of the [Corpus](#Corpus)-section, the methodology developed has been applied to a corpus consisting of all archived material from the kidlink.org material available at Internet Archive. This corpus consists of more than 380 thousand sources where almost 300 thousand of these are text. For this iteration, we ran the LLM with our updated categories for an extended amount of time on the HPC infrastructure.
 <!-- #endregion -->
 
-```python editable=true slideshow={"slide_type": ""}
+```python editable=true slideshow={"slide_type": ""} tags=["figure-2"]
 from IPython.display import Image, display
 
 metadata={
@@ -410,9 +410,9 @@ display(Image("./media/warc_distribution_run2_kidlink.png"), metadata=metadata)
 Running the method on this many documents produced a database with more than five million matches between categories and sources. This number of results requires us to match sources on multiple categories at once. This is done to narrow the number of results, but also to zoom in on documents that can be used to investigate the questions that we are interested in as researchers. As an example, we will be focusing on discovering sources that can inform us on how children communicated with others on the Kidlink forum before 2005.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
+<!-- #region jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} tags=["table-1"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
@@ -420,6 +420,10 @@ When working with results of this magnitude, we need to filter the results meani
 | topic_mixing_markers          | Sudden topic shifts within single passages|
 | age_identity_claims           | Self-reported ages, grade references|
 | youth_slang_informality       | Informal expressions, slang, emoticons|
+
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 
 As the results from the LLMs categorisation are stored in a SQLite database, it is possible to computationally extract all sources that match all of the categories above with the following python script:
 <!-- #endregion -->
@@ -584,7 +588,7 @@ The script can be called from the command line, or its methods can be imported a
 When the extraction script was run on the bigger Kidlink corpus, 428 sources were extracted. Among these 428 sources, we have found sources that we have not been able to locate through traditional close reading of the corpus, as it has not been possible to discover them through traditional search interfaces or by navigating the sources in a web archive.
 <!-- #endregion -->
 
-```python editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "table-1"]
+```python editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2"]
 from script.multiple_category_matcher import fetch_matched_results, build_dataframe
 from IPython.display import display, HTML
 import pandas as pd
