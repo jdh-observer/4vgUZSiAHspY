@@ -630,18 +630,6 @@ multi-core machine.
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-The pipeline is the `llm-discovery` package, which consolidates into one
-documented and tested tool the scripts that produced the Kidlink run on
-the Danish academic cloud. Each subcommand writes to a shared SQLite
-database. `fetch` reproduces pages from the Internet Archive Wayback
-Machine through its raw-content (`id_`) endpoint, converting each to
-markdown under a `{timestamp}/{url}` header that records where and when it
-was archived, and preserving the fetched response as a WARC record, a
-capability added after the run reported here. The Kidlink corpus itself
-reached the pipeline as markdown from an earlier conversion of web archive
-holdings, described in the methodology. <!--- THIS SHOULD PROBABLY NOT BE INCORPORATED IN TEXT -->
-
-
 The pipeline is split into discrete subcommands, each handling one stage 
 from database creation through classification to validation, so that the 
 expensive GPU work is isolated and every step can be run, resumed, or relocated independently.
@@ -686,6 +674,7 @@ The corpus database does not ship with the repository, so these commands
 reproduce the method rather than the data.
 <!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 The verifier pass shows that the model's quotations are almost always on
 the page. Whether its classifications are right is a different kind of
 question, because the categories range from the literal to the thematic.
@@ -713,7 +702,7 @@ table below counts, among the positives that cite evidence at all, the
 verdicts whose evidence fails the condition. A positive here counts both
 yes and maybe verdicts, where the discovery queries earlier in the article
 use yes alone.
-
+<!-- #endregion -->
 
 | Category | Positives citing evidence | Flagged | Rate |
 |----------|--------------------------:|--------:|-----:|
