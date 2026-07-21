@@ -320,7 +320,7 @@ Running the method on this many documents produced a database with more than fiv
 
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
-<!-- #region jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} tags=["table-1"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
@@ -496,7 +496,7 @@ The script can be called from the command line, or its methods can be imported a
 When the extraction script was run on the bigger Kidlink corpus, 428 sources were extracted. Among these 428 sources, we have found sources that we have not been able to locate through traditional close reading of the corpus, as it has not been possible to discover them through traditional search interfaces or by navigating the sources in a web archive.
 <!-- #endregion -->
 
-```python editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2"]
+```python editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2-*"]
 from script.multiple_category_matcher import fetch_matched_results, build_dataframe
 from IPython.display import display, HTML
 import pandas as pd
@@ -556,7 +556,7 @@ of whitespace, markdown, and the formatting of links, and as a genuine
 mismatch when it failed every test, including the one that strips all
 formatting away.
 
-
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["table-3-*"] -->
 | Category | Quotations | Grounded | Genuine mismatch |
 |----------|-----------:|---------:|-----------------:|
 | explicit_age_child_references | 287,913 | 99.95% | 0.004% |
@@ -581,7 +581,7 @@ formatting away.
 | governed_site | 204,980 | 99.76% | 0.013% |
 | non_governed_site | 27,263 | 99.77% | 0.044% |
 | **Total** | **1,633,180** | **99.91%** | **0.010%** |
-
+<!-- #endregion -->
 
 The grounded share stays above 99.4 per cent in every category, including
 the boilerplate categories such as `governed_site` whose quotations arrive
@@ -704,6 +704,7 @@ yes and maybe verdicts, where the discovery queries earlier in the article
 use yes alone.
 <!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["table-4-*"] -->
 | Category | Positives citing evidence | Flagged | Rate |
 |----------|--------------------------:|--------:|-----:|
 | explicit_age_child_references | 149,918 | 3,014 | 2.0% |
@@ -712,7 +713,7 @@ use yes alone.
 | question_forms | 21,285 | 50 | 0.2% |
 | first_person_plural_inclusivity | 79,866 | 933 | 1.2% |
 | family | 38,850 | 924 | 2.4% |
-
+<!-- #endregion -->
 
 Across the six categories the flag rate runs from a quarter of a per cent
 for questions to five per cent for age-identity claims. Reading a sample of
@@ -752,7 +753,7 @@ tested it. We could only make this diagnosis because the
 pipeline stores the model's stated reasoning beside every verdict, and
 reading those statements showed the pattern.
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "table-5-*"] -->
 | category                        | positives_total | flagged_total | no_quote |
 |---------------------------------|-----------------|---------------|----------|
 | explicit_age_child_references   | 149970          | 3066          | 52       |
@@ -798,7 +799,7 @@ settle against ourselves. The table below gives the count for each
 category.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} -->
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["table-6-*"] -->
 | Category | Endorsed of ten |
 |----------|----------------:|
 | explicit_age_child_references | 8 |
