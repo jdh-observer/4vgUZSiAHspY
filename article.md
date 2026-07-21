@@ -518,6 +518,345 @@ As mentioned in the section above, the approach has made it possible for us to d
 One example of such a source is a log from an Internet Relay Chat, which we have only been able to discover through this approach. The landing page of kidlink.org has had a consistent design throughout our period. From the landing page, users would be introduced to how they were supposed to participate in Kidlink, and they would be guided towards specific parts of the domain. When exploring the archived versions of the domain with the landing page as a starting point, one is left with a one-sided narrative of primarily educational content. The LLM-assisted discovery of source material changes what can be found. By querying our database of categorised sources, we were able to find a log from an IRC event, otherwise deeply buried in the site's structure. In this IRC, children were chatting with a Bosnian girl who kept a diary during the Bosnian War. This form of direct communication has been almost impossible to find when navigating the archived website from the landing page.
 <!-- #endregion -->
 
+## Validation
+
+As described in [Building Document-level Binary Classifications](#Building-Document-level-Binary-Classifications-through-Inference-with-GPT-OSS-120b),
+we chose exhaustive classification over similarity search, asking every
+document the same question for every category, answered yes, maybe, or no,
+and requiring verbatim quotes as evidence. These quotes give us snippets to
+scan when forming our own thematic judgement of a document, and they give
+us a cross-check on the model's judgement as well. Because the model is
+instructed to extract text exactly as it appears and to interpret nothing,
+a faithful quotation must appear in the document it was taken from, and
+every claimed match can be tested against its source.
+
+We tested all 1,633,180 quotations the model produced for the Kidlink
+corpus. Allowing for whitespace and markdown, 89.1 per cent of quotations
+are exact substrings of their source document. Another 10.8 per cent
+differ no more than damaged archiving explains, so 99.9 per cent in all
+are on their page. A further 288 reappear when both quotation and page are
+reduced to bare letters and digits. That leaves 1,198 quotations, or 0.073
+per cent of the total: 168 match nothing on their page, and 1,030 use the
+page's own words in an order we could not find there. At worst, one
+quotation in about fourteen hundred is not on the page it cites.
+
+A stronger model reached over the internet would most likely remove even
+this small residue, but only by moving the children's data off the
+university's own machines, which would be against our data delivery agreement and our ethical framework.
+Working this way limits the size of corpus we can engage with, as
+classifying almost 300 thousand documents against all 21 categories took
+roughly 300 GPU-hours of our allocation, but the trade is speed for control.
+This way, we can be certain that no data left the system, and that the method can be
+rerun end to end within the constraints that inference with large language
+models allows.
+
+The table below breaks this check down by category. A quotation counts as
+grounded when it was found in its source document, allowing for differences
+of whitespace, markdown, and the formatting of links, and as a genuine
+mismatch when it failed every test, including the one that strips all
+formatting away.
+
+
+| Category | Quotations | Grounded | Genuine mismatch |
+|----------|-----------:|---------:|-----------------:|
+| explicit_age_child_references | 287,913 | 99.95% | 0.004% |
+| corporate_register_markers | 113,008 | 99.97% | 0.022% |
+| educational_register_markers | 181,834 | 99.94% | 0.022% |
+| non_standard_spelling | 15,151 | 99.92% | 0.026% |
+| syntactic_irregularities | 58,771 | 99.98% | 0.002% |
+| topic_mixing_markers | 73,778 | 99.82% | 0.004% |
+| age_identity_claims | 78,789 | 99.96% | 0.006% |
+| gendered_direct_address | 627 | 99.84% | 0.159% |
+| gendered_activities_objects | 35,136 | 99.97% | 0.011% |
+| interactive_element_text | 76,546 | 99.98% | 0.003% |
+| youth_slang_informality | 22,399 | 99.91% | 0.009% |
+| question_forms | 51,438 | 99.97% | 0.004% |
+| first_person_plural_inclusivity | 142,554 | 99.96% | 0.011% |
+| family | 78,366 | 99.94% | 0.008% |
+| directed_at_kids | 14,665 | 99.97% | 0.020% |
+| fanculture | 10,703 | 99.83% | 0.000% |
+| hobbies | 120,776 | 99.93% | 0.002% |
+| computer_culture | 8,856 | 99.86% | 0.011% |
+| conversations | 29,627 | 99.44% | 0.010% |
+| governed_site | 204,980 | 99.76% | 0.013% |
+| non_governed_site | 27,263 | 99.77% | 0.044% |
+| **Total** | **1,633,180** | **99.91%** | **0.010%** |
+
+
+The grounded share stays above 99.4 per cent in every category, including
+the boilerplate categories such as `governed_site` whose quotations arrive
+wrapped in the markup of menus and footers. The share of genuinely absent
+quotations stays below one in two thousand in every category but the
+smallest, where it is a single mismatched quotation among 627. Reading all
+168 genuine mismatches shows three main kinds, often repeated across
+several crawls of the same page. The largest is translation,
+where the model quotes in English a passage the page carries in Portuguese
+or Danish. The second is plausible boilerplate asserted on near-empty
+pages, a copyright line or a welcome sentence the converted text does not
+contain. The third is description in place of quotation, at its plainest
+in a citation reading "see blockquote 1 above". A few are real page text
+stranded by damaged encoding. These are the model's most deceptive
+outputs, fluent and on-topic yet absent from the page.
+
+The 1,030 quotations that reused the page's words without a placeable
+passage we read more closely, sampling 45 across every category.
+Twenty-five differed from their page only in presentation, as when a
+quotation crosses text the archive interleaved with another language.
+Sixteen joined real passages from different parts of the page without
+marking the joins, most often in chat transcripts, where lines from
+separate speakers or separate sessions can read as one exchange. Four
+condensed, translated, or reassembled the page's words into text that is
+not on the page. Researchers drawing on the conversation categories should
+therefore read a quotation's source before treating it as one passage.
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+The check is the `verify` subcommand of the `llm-discovery` package. The
+conversion that produced the corpus interleaves link addresses through the
+page's prose, so each quotation is compared with its source twice, once as
+the page stands and once with markdown link targets stripped, and the
+better reading counts. A first pass looks for the quotation as a substring
+after collapsing whitespace and markdown escapes, and scores the rest with
+a rapidfuzz partial ratio (a fuzzy-matching function that scores how closely 
+a shorter string matches the best-fitting substring within a longer one),
+where 70 out of 100 or better counts as grounded. A second pass takes only the quotations that fail the first,
+reduces quotation and page to lowercase letters and digits with accents and
+Nordic characters folded, and asks whether the quotation reappears as a
+contiguous string, or, failing that, whether at least nine of every ten of
+its words appear on the page. Quotations that pass only that last, weakest
+test are the 1,030 that use the page's words in an order we could not
+find. Running `llm-discovery verify --db corpus.db` reproduces the table
+above, auditing all 1.6 million quotations in under a minute on a
+multi-core machine.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+The pipeline is the `llm-discovery` package, which consolidates into one
+documented and tested tool the scripts that produced the Kidlink run on
+the Danish academic cloud. Each subcommand writes to a shared SQLite
+database. `fetch` reproduces pages from the Internet Archive Wayback
+Machine through its raw-content (`id_`) endpoint, converting each to
+markdown under a `{timestamp}/{url}` header that records where and when it
+was archived, and preserving the fetched response as a WARC record, a
+capability added after the run reported here. The Kidlink corpus itself
+reached the pipeline as markdown from an earlier conversion of web archive
+holdings, described in the methodology. <!--- THIS SHOULD PROBABLY NOT BE INCORPORATED IN TEXT -->
+
+
+The pipeline is split into discrete subcommands, each handling one stage 
+from database creation through classification to validation, so that the 
+expensive GPU work is isolated and every step can be run, resumed, or relocated independently.
+ `prep-db` creates the database, loads the category definitions from `prompts/*.yaml`, and loads the
+documents with change detection by SHA-256, splitting any document longer
+than 80,000 characters at paragraph boundaries (adjust this to fit your model's context window). `preflight` excludes
+binary files by their magic bytes and drops pages too short or too garbled
+to classify, before any model time is spent on them. `process` is the
+classification stage described above, streaming document-category pairs to
+the locally served model and writing each verdict crash-safely to its own
+file. `import-results` reads those files into the database idempotently,
+so an interrupted run never duplicates a result. `verify` and `probe` are
+the validation checks reported in this section.
+
+On one machine with a served model, the full sequence is:
+
+```
+llm-discovery prep-db       --db corpus.db --input-dir corpus_md/ --prompts-dir prompts/
+llm-discovery preflight     --db corpus.db
+llm-discovery process       --db corpus.db --server-url http://localhost:8000
+llm-discovery import-results --db corpus.db --input-dir out/
+llm-discovery verify        --db corpus.db
+llm-discovery probe         --db corpus.db
+```
+
+Only `process` needs a GPU, and the validation commands run on any machine
+holding the database. For supercomputer runs the same stages ride inside an
+Apptainer container: `init` stages the container, model weights, and
+environment onto the cluster, `deploy` assembles the data directory,
+uploads it, and submits the batch job, `status --watch` follows the job,
+and `retrieve` brings the finished database home. This path has run on
+Australia's NCI Gadi:
+
+```
+llm-discovery init     --platform gadi --project <code> --gpu-queue gpuhopper
+llm-discovery deploy   --platform gadi --project <code> --gpu-queue gpuhopper
+llm-discovery status   --platform gadi --project <code> --watch
+llm-discovery retrieve --platform gadi --project <code>
+```
+
+The corpus database does not ship with the repository, so these commands
+reproduce the method rather than the data.
+<!-- #endregion -->
+
+The verifier pass shows that the model's quotations are almost always on
+the page. Whether its classifications are right is a different kind of
+question, because the categories range from the literal to the thematic.
+Whether a page truly addresses children or carries an institutional
+register is a reading, and those we checked by hand during category
+development, sampling ten results for every category of the test corpus and
+comparing the model's reasoning against our own reading of each page, as
+reported above. Six of the 21 categories, though, are defined by their
+surface: a family term, a stated age, a question, a gendered form of
+address, or the first person plural. For these, a genuine positive must
+cite evidence carrying the defining feature, and a positive whose quotes
+carry none can be counted mechanically. The count runs in one direction
+only, catching the over-confident positive. A missed document cannot be
+found the same way, because a keyword search across the corpus returns far
+too much to stand in for a missed classification, so recall is not measured
+here. The expert calibration described in the methodology broadened the
+category prompts toward the corpus's languages, but no ground truth for
+missed documents exists.
+
+For each of the six categories we wrote a deliberately generous necessary
+condition, a set of surface forms that any true member of the category must
+contain. We collected candidate words from the quotes the model cited and
+kept the ones that name the feature in one of the corpus's languages. The
+table below counts, among the positives that cite evidence at all, the
+verdicts whose evidence fails the condition. A positive here counts both
+yes and maybe verdicts, where the discovery queries earlier in the article
+use yes alone.
+
+
+| Category | Positives citing evidence | Flagged | Rate |
+|----------|--------------------------:|--------:|-----:|
+| explicit_age_child_references | 149,918 | 3,014 | 2.0% |
+| age_identity_claims | 43,607 | 2,234 | 5.1% |
+| gendered_direct_address | 593 | 4 | 0.7% |
+| question_forms | 21,285 | 50 | 0.2% |
+| first_person_plural_inclusivity | 79,866 | 933 | 1.2% |
+| family | 38,850 | 924 | 2.4% |
+
+
+Across the six categories the flag rate runs from a quarter of a per cent
+for questions to five per cent for age-identity claims. Reading a sample of
+the flagged quotes, ten from every category, finds two kinds in comparable
+numbers. In one, the model read correctly and the word list was blind,
+because the corpus is multilingual and damaged in archiving: kinship terms
+in Romanian, a question carried by word order rather than a question mark,
+ages written out as words, text split apart as in "B �RN". In the other,
+the model matched words against their sense and the positive is wrong: a
+ceremony "almost eight hundred years old" taken for a person's age, the
+ages of young eagles, a server name read as a kinship term, a statement
+counted as a question. Which kind dominates varies by category, and it
+anticipates the hand-check reported below: for explicit age references
+nearly every flag is the check's blindness, while for age-identity claims
+most flags are the model's error.
+
+The table above leaves out 567 positive verdicts that cited no quote at
+all. We read the stated reasoning for these, and most of them come from the
+same situation. The corpus contains stubs, navigation pages and form
+redirects whose converted text is a couple of hundred characters long,
+where the average document is over eight thousand. Given one of these
+pages, the model often speculated about what such a page would normally
+contain and answered maybe without quoting anything. All but eight of the
+567 verdicts are maybes rather than yes. In the uncleaned counts, which the
+hermeneutic layer shows, gendered direct address stands out with 95 of its
+688 positives citing nothing, but that 95 is close to the 117 for family
+and the 168 for first person plural. The category stands out because
+genuine gendered address is rare in this corpus.
+
+For researchers using the workflow, the lesson is to work with positives
+whose evidence can be checked. The discovery queries earlier in the article
+use only yes verdicts, which already avoids almost all of these cases, and
+dropping every positive without a grounded blockquote removes them
+completely, though it will also drop some true positives. A different
+system prompt might reduce this problem at its source, but we have not
+tested it. We could only make this diagnosis because the
+pipeline stores the model's stated reasoning beside every verdict, and
+reading those statements showed the pattern.
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+| category                        | positives_total | flagged_total | no_quote |
+|---------------------------------|-----------------|---------------|----------|
+| explicit_age_child_references   | 149970          | 3066          | 52       |
+| age_identity_claims             | 43725           | 2352          | 118      |
+| gendered_direct_address         | 688             | 99            | 95       |
+| question_forms                  | 21302           | 67            | 17       |
+| first_person_plural_inclusivity | 80034           | 1101          | 168      |
+| family                          | 38967           | 1041          | 117      |
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+The check is the `probe` subcommand of the `llm-discovery` package. For
+each of the six categories it holds a necessary condition, a set of surface
+forms that any true member of the category must contain. We built the
+conditions by ranking the words in the quotes the model cited and keeping
+every form that genuinely names the feature, so the family condition holds
+kinship terms in English, Danish, Spanish, Portuguese, Norwegian, and
+Korean among others. A form enters a condition because it is a kinship word
+in some language, never because the model cited it. Matching is done with
+term and text lower-cased, with Danish letters folded so that "Aarhus" and
+"�rhus" agree, and with markdown emphasis treated as a separator. A Latin
+term matches on word boundaries, so that "old" does not match inside
+"gold", while Korean matches as a substring, and the first-person-plural
+condition adds verb-ending patterns for Spanish, Portuguese, and Italian,
+where the pronoun is usually dropped. The command keeps forty flagged
+quotations from each category, and the sample reading reported above drew
+on those. The other fifteen categories are defined by open lists of
+examples, such as the games and bands that stand for computer culture, and
+no closed condition exists for them, so they rest on the expert calibration
+instead. Running `llm-discovery probe --db corpus.db` reproduces the
+uncleaned table above in under a minute.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+Both checks so far are mechanical, and neither asks whether a yes verdict
+means what a researcher wants it to mean. The quotation readings above were
+made by a language-model assistant working against the database. This last
+check we read ourselves: ten yes verdicts from every category of the
+Kidlink run, 210 documents drawn by a reproducible sample, each judged
+against the category's intent, the same method as the calibration sampling
+reported above. We endorsed 132 of the 210, counting the two we could not
+settle against ourselves. The table below gives the count for each
+category.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+| Category | Endorsed of ten |
+|----------|----------------:|
+| explicit_age_child_references | 8 |
+| corporate_register_markers | 10 |
+| educational_register_markers | 10 |
+| non_standard_spelling | 2 |
+| syntactic_irregularities | 2 |
+| topic_mixing_markers | 0 |
+| age_identity_claims | 5 |
+| gendered_direct_address | 6 |
+| gendered_activities_objects | 8 |
+| interactive_element_text | 10 |
+| youth_slang_informality | 7 |
+| question_forms | 9 |
+| first_person_plural_inclusivity | 8 |
+| family | 4 |
+| directed_at_kids | 7 |
+| fanculture | 7 |
+| hobbies | 6 |
+| computer_culture | 4 |
+| conversations | 10 |
+| governed_site | 9 |
+| non_governed_site | 0 |
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+The disagreements concentrate where a category's prompt reaches wider than
+its intent. Topic mixing, non-standard spelling, and syntactic
+irregularities ask for surface features that ordinary pages carry for
+unremarkable reasons, and the model returned poetry, recipes, and typing
+errors that satisfy the instruction while missing the point. A smaller
+group are the model's own errors, a reasoning line that repeats itself
+before it settles, or a family term read in the wrong sense. A few rest on
+evidence the model never saw, because the page carried its text inside
+images. Very few are inventions. The model did what we said rather than
+what we wanted, and the categories that name their intent plainly,
+conversations, the register markers, interactive elements, earned ten of
+ten.
+
+The discovery queries reported above do not rest on single categories. The
+IRC and diary examples came from documents positive for five chosen
+categories at once, and an intersection is far more selective than its
+weakest member. The counts above say which categories to trust alone, and
+combining categories recovers precision from noisy components, though
+every added category narrows what can be found.
+<!-- #endregion -->
+
 <!-- #region editable=true slideshow={"slide_type": ""} -->
 ## Scalability, usability and ethics
 <!-- #endregion -->
