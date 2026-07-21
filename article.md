@@ -63,7 +63,7 @@ The proposed method utilises a large language model (LLM) to categorise document
 
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": ""} -->
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 ## Introduction
 <!-- #endregion -->
 
@@ -518,9 +518,10 @@ As mentioned in the section above, the approach has made it possible for us to d
 One example of such a source is a log from an Internet Relay Chat, which we have only been able to discover through this approach. The landing page of kidlink.org has had a consistent design throughout our period. From the landing page, users would be introduced to how they were supposed to participate in Kidlink, and they would be guided towards specific parts of the domain. When exploring the archived versions of the domain with the landing page as a starting point, one is left with a one-sided narrative of primarily educational content. The LLM-assisted discovery of source material changes what can be found. By querying our database of categorised sources, we were able to find a log from an IRC event, otherwise deeply buried in the site's structure. In this IRC, children were chatting with a Bosnian girl who kept a diary during the Bosnian War. This form of direct communication has been almost impossible to find when navigating the archived website from the landing page.
 <!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 ## Validation
 
-As described in [Building Document-level Binary Classifications](#Building-Document-level-Binary-Classifications-through-Inference-with-GPT-OSS-120b),
+As described in [Building document-level binary classifications through inference](#anchor-Building-Document-level-Binary-Classifications-through-Inference),
 we chose exhaustive classification over similarity search, asking every
 document the same question for every category, answered yes, maybe, or no,
 and requiring verbatim quotes as evidence. These quotes give us snippets to
@@ -555,6 +556,7 @@ grounded when it was found in its source document, allowing for differences
 of whitespace, markdown, and the formatting of links, and as a genuine
 mismatch when it failed every test, including the one that strips all
 formatting away.
+<!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["table-3-*"] -->
 | Category | Quotations | Grounded | Genuine mismatch |
