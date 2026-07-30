@@ -5,7 +5,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.19.4
+      jupytext_version: 1.19.5
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -22,7 +22,7 @@ Aarhus University
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": ""} tags=["contributor"] -->
-### Brian  Balsun-Stanton [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-4932-7912) 
+### Brian  Ballsun-Stanton [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-4932-7912) 
 Macquarie University
 <!-- #endregion -->
 
@@ -258,7 +258,7 @@ Each classification call pairs one document with one category prompt and require
 First, provide your reasoning and analysis. Then, provide ONLY valid JSON with this structure: { "match": "yes" or "maybe" or "no", "blockquotes": ["quote 1", "quote 2"] }
 ```
 
-Requiring reasoning before the verdict is deliberate. By forcing the model to articulate its interpretation of the category before committing to a classification, we produce internal consistency between the analysis and the output using a "Thought Anchor" pattern (<cite id="8cbzy"><a href="#zotero%7C13014974%2F56FTR44T">(Bogdan et al., 2025)</a></cite>). This is distinct from chain-of-thought prompting for problem-solving: the reasoning exists to bind the model to a coherent position, not to discover one. The reasoning traces are preserved in the database, serving additionally as an audit trail and as a means of prompt calibration. We read how the model interpreted category boundaries and refine prompts accordingly. All inference was performed at temperature 0 for deterministic, reproducible classifications.
+Requiring reasoning before the verdict is deliberate. By forcing the model to articulate its interpretation of the category before committing to a classification, we produce internal consistency between the analysis and the output using a "Thought Anchor" pattern (<cite id="8cbzy"><a href="#zotero%7C13014974%2F56FTR44T">(Bogdan et al., 2025)</a></cite>). This is distinct from chain-of-thought prompting for problem-solving: the reasoning exists to bind the model to a coherent position, not to discover one. The reasoning traces are preserved in the database, serving additionally as an audit trail and as a means of prompt calibration. We read how the model interpreted category boundaries and refine prompts accordingly. All inference was performed at temperature 0 to reduce stochastic variation in model outputs. No explicit random seed is supplied, and this configuration does not guarantee identical outputs across repeated runs.
 
 The result is a corpus where every document-category pair has a definitive classification. The extracted blockquotes enable a further step: researchers may make an inductive coding pass on the extracted evidence to support the research question under investigation, building on the deductive scaffold.
 
