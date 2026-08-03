@@ -236,7 +236,7 @@ prompt: |
 Each topic contains a prompt for the LLM. This prompt is central to making the LLM understand what it should look for in the sources. The process of creating categories for the LLM is where domain expertise is essential. The categories for this article have been constructed from close readings of a vast number of newspapers from the period, Internet guidebooks for children, secondary literature, other media, and the archived web itself. The categories have been constructed from months of working with sources in and around the corpus. The close reading of the sources and other contextual works makes the produced categories more relevant, as we have learned through the close readings what is of interest in the corpus (<cite id="5frso"><a href="#zotero%7C13014974%2F4T525T4G">(Ohrvik, 2024)</a></cite>). Additionally, some of the categories have been enhanced with informal knowledge from lived experience.[^1](#note1)
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "#anchor1"] -->
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "anchor1"] -->
 ## Building document-level binary classifications through inference
 <!-- #endregion -->
 
