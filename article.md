@@ -320,7 +320,7 @@ Running the method on this many documents produced a database with more than fiv
 
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
-<!-- #region editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of matching categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
@@ -558,7 +558,7 @@ mismatch when it failed every test, including the one that strips all
 formatting away.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["table-3-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Percentage of correct extraction"]}} slideshow={"slide_type": ""} tags=["table-3-*"] -->
 | Category | Quotations | Grounded | Genuine mismatch |
 |----------|-----------:|---------:|-----------------:|
 | explicit_age_child_references | 287,913 | 99.95% | 0.004% |
@@ -708,7 +708,7 @@ yes and maybe verdicts, where the discovery queries earlier in the article
 use yes alone.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["table-4-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Categories with positive verdicts"]}} slideshow={"slide_type": ""} tags=["table-4-*"] -->
 | Category | Positives citing evidence | Flagged | Rate |
 |----------|--------------------------:|--------:|-----:|
 | explicit_age_child_references | 149,918 | 3,014 | 2.0% |
@@ -757,7 +757,7 @@ tested it. We could only make this diagnosis because the
 pipeline stores the model's stated reasoning beside every verdict, and
 reading those statements showed the pattern.
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "table-5-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Distribution of claims with backing quote"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-5-*"] -->
 | category                        | positives_total | flagged_total | no_quote |
 |---------------------------------|-----------------|---------------|----------|
 | explicit_age_child_references   | 149970          | 3066          | 52       |
@@ -803,7 +803,7 @@ settle against ourselves. The table below gives the count for each
 category.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["table-6-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Manual check of categorisation"]}} slideshow={"slide_type": ""} tags=["table-6-*"] -->
 | Category | Endorsed of ten |
 |----------|----------------:|
 | explicit_age_child_references | 8 |
