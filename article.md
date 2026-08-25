@@ -320,7 +320,7 @@ Running the method on this many documents produced a database with more than fiv
 
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
-<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of matching categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of mathcing categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
@@ -496,7 +496,7 @@ The script can be called from the command line, or its methods can be imported a
 When the extraction script was run on the bigger Kidlink corpus, 428 sources were extracted. Among these 428 sources, we have found sources that we have not been able to locate through traditional close reading of the corpus, as it has not been possible to discover them through traditional search interfaces or by navigating the sources in a web archive.
 <!-- #endregion -->
 
-```python editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2-*"]
+```python editable=true jdh={"module": "object", "object": {"source": ["Sources mathcing categories 2, 5, 7, 8 & 13"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2-*"]
 from script.multiple_category_matcher import fetch_matched_results, build_dataframe
 from IPython.display import display, HTML
 import pandas as pd
