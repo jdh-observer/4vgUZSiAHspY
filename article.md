@@ -1,11 +1,12 @@
 ---
 jupyter:
   jupytext:
+    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.19.1
+      jupytext_version: 1.19.5
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -22,7 +23,7 @@ Aarhus University
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": ""} tags=["contributor"] -->
-### Brian  Balsun-Stanton [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-4932-7912) 
+### Brian  Ballsun-Stanton [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-4932-7912) 
 Macquarie University
 <!-- #endregion -->
 
@@ -53,27 +54,27 @@ Archived Web, Large Language Model, Document Discovery, Methodology
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["abstract"] -->
-Archival collections of born digital sources often consist of millions, even billions of items. Discovering relevant sources for traditional close reading in this type of collection is a challenge because text-based queries return unreadable amounts of possibly relevant material. This means that systems historians traditionally have used for finding relevant sources are challenged.
+Archival collections of born-digital sources often consist of millions, even billions of items. Discovering relevant sources for traditional close reading in this type of collection is a challenge because text-based queries return unreadable amounts of possibly relevant material. This means that systems historians traditionally have used for finding relevant sources are challenged.
 
-Besides the difficulty of finding relevant sources for close reading, a particular kind of digital archive: web archives, presents even further challenges to historians. Unlike many other digital collections, web archives do not collect, curate, and make their material available in ways that are modelled on already existing archival practices. This means that besides the difficulties of finding sources for close reading, these archives also challenge the fundamental structures that enable the application of source criticism creating a double bind in terms of working with archived web material in ways that resemble the way historians traditionally work.
+Besides the difficulty of finding relevant sources for close reading, a particular kind of digital archive: web archives, presents even further challenges to historians. Unlike many other digital collections, web archives do not collect, curate, and make their material available in ways that are modelled on already existing archival practices. This means that, besides the difficulties of finding sources for close reading, these archives also challenge the fundamental structures that enable the application of source criticism, creating a double bind in terms of working with archived web material in ways that resemble the way historians traditionally work.
 
-With this article we propose a method that leads researchers to find the sources most relevant for their research question in an extremely vast and messy corpus with unclear and mixed provenance. Our method lets historians and other researchers work from a problem-oriented approach where the research questions lead the search for relevant source material. This method is inspired by the way historians generally work with discovery in archival collections. 
+With this article, we propose a method that leads researchers to find the sources most relevant for their research question in an extremely vast and messy corpus with unclear and mixed provenance. Our method lets historians and other researchers work from a problem-oriented approach where the research questions lead the search for relevant source material. This method is inspired by the way historians generally work with discovery in archival collections. 
 
-The proposed method utilises a large language model (LLM) to categorise documents from a web archive collection with an uncertain provenance based on categories constructed from our initial research question. In doing so, the paper contributes to the field of digital history with a methodological approach for discovering source material in a collection with a large degree of uncertain provenance. This particular focus sets the article apart from many approaches in the field of digital history, which focus not on document discovery but aggregated analysis of source material. 
+The proposed method utilises a large language model (LLM) to categorise documents from a web archive collection with an uncertain provenance based on categories constructed from our initial research question. In doing so, the paper contributes to the field of digital history with a methodological approach for discovering source material in a collection with a large degree of uncertain provenance. This particular focus sets the article apart from many approaches in the field of digital history, which focus not on document discovery but on aggregated analysis of source material. 
 
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": ""} -->
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 ## Introduction
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"8dxoz": [{"id": "13014974/U4NRYK6X", "source": "zotero"}], "v5m1j": [{"id": "13014974/U4NRYK6X", "source": "zotero"}]}} slideshow={"slide_type": ""} -->
-Knowing the origins, the provenance, of a source is key in source criticism. Hence, imagine being a historian who works with an archive where you know almost nothing about the origins of the sources: nothing about why the archive collected them, who created them in the first place, how they relate to other sources in the archive, not even the date they were created. 
+Knowing the origins and the provenance of a source is key in source criticism. Hence, imagine being a historian who works with an archive where you know almost nothing about the origins of the sources: nothing about why the archive collected them, who created them in the first place, how they relate to other sources in the archive, not even the date they were created. 
 
-This is not a thought experiment, unfortunately, rather these are only some of the “manyfold barriers” of working with the archived web as a primary source (<cite id="v5m1j"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>).
+This is not a thought experiment. Unfortunately, these are only some of the “manyfold barriers” of working with the archived web as a primary source (<cite id="v5m1j"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>).
 Archived web material is, in short, fragmented copies of the past web stored in web archives (<cite id="56gu2"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>). One can choose to look only at a single webpage, like BBC.co.uk, and contextualise it within an institution, the British Broadcasting Corporation. And archives with clearly demarcated, structured collections with rich metadata like the UK Government Web Archive, also make the information needed to apply the principles of source criticism available to some degree (<cite id="8dxoz"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>). However, using websites from only one institution does not reflect the interactive nature and use of the web, and, for the most part, the web is not made up of sites with easily distinguishable authors and institutional contexts. Furthermore, historians will, in most cases, not know which websites of interest to their enquiry have existed, as no central register or search engine covers the past web. The largest and oldest web archive in the world, The Internet Archive, only supports search by URL, not the text on the actual pages in the archive, let alone search for different filetypes.
 
-In this article we discuss how using the archived web as a source challenges the tradition(s) of source discovery and criticism because of the way the web has been archived and made available. Based on these discussions, we explore the extent to which it is possible to use a large language model to set up a workflow for detailed document discovery attuned to the ways historians have traditionally worked with discovery of sources.
+In this article, we discuss how using the archived web as a source challenges the tradition(s) of source discovery and criticism because of the way the web has been archived and made available. Based on these discussions, we explore the extent to which it is possible to use a large language model to set up a workflow for detailed document discovery attuned to the ways historians have traditionally worked with the discovery of sources. The workflow presented in this article introduces how  the classification of individual documents done with a large language model can be used as part of a document discovery pipeline.
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
@@ -83,11 +84,11 @@ In this article we discuss how using the archived web as a source challenges the
 <!-- #region citation-manager={"citations": {"0gz8b": [{"id": "13014974/T8A4A2LN", "source": "zotero"}], "1q44k": [{"id": "13014974/Z86YG7B9", "source": "zotero"}], "3z6y9": [{"id": "13014974/4DH2IGN8", "source": "zotero"}], "56gu2": [{"id": "13014974/YRJU2TH6", "source": "zotero"}], "97gw9": [{"id": "", "source": "zotero"}], "a9o69": [{"id": "13014974/MEFA9S5G", "source": "zotero"}], "h2jl9": [{"id": "13014974/VMGM7V76", "source": "zotero"}], "ig0zy": [{"id": "13014974/MEFA9S5G", "source": "zotero"}], "ixnae": [{"id": "13014974/YRJU2TH6", "source": "zotero"}], "t1u64": [{"id": "13014974/WMS9YB9E", "source": "zotero"}], "xzydr": [{"id": "13014974/9RUGHY4C", "source": "zotero"}], "yldee": [{"id": "13014974/MEFA9S5G", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
 Archived web material represents one of the richest but most overlooked collections of sources for contemporary historians, however many scholars do not know of their potential or even their existence (<cite id="3z6y9"><a href="#zotero%7C13014974%2F4DH2IGN8">(Winters, 2018)</a></cite>,<cite id="xzydr"><a href="#zotero%7C13014974%2F9RUGHY4C">(Winters, 2017)</a></cite>). To forego use of the archived web is to overlook valuable primary sources, as these corpora are rich with information from the last three decades. Much of the material from the archived web is authored by people who would otherwise never have made it into the historical record (<cite id="ig0zy"><a href="#zotero%7C13014974%2FMEFA9S5G">(Milligan, 2019)</a></cite>). In the words of Ian Milligan: “One cannot write most histories of the 1990s or later without reference to web archives, or at the very least to do so would be to neglect a major medium of the period.” (<cite id="a9o69"><a href="#zotero%7C13014974%2FMEFA9S5G">(Milligan, 2019)</a></cite>, 3). This circumstance will only become more central with the ongoing shift from analogue to digital processes in modern society (<cite id="t1u64"><a href="#zotero%7C13014974%2FWMS9YB9E">(Brügger, 2016)</a></cite>). 
 
-The Internet Archive started archiving the web in 1996. They began storing websites for preservation and future use. Their collection is not the only available web archive collection, but by far the oldest and most expansive (<cite id="0gz8b"><a href="#zotero%7C13014974%2FT8A4A2LN">(Rackley, 2010)</a></cite>). There are multiple ways to archive websites and the way it is done has many implications for how the material can be used—a situation that is parallel to how collection and preservation practices impact the use of all other archives. The most comprehensive and widespread way of archiving is through web crawling. In web crawling, a list of desired websites (a seed list) is fed to an archiving software that systematically retrieves the webpages on the list one by one. At each website, the crawler follows all the hyperlinks linking to other websites, these are also saved. The crawler continues this iterative process as far 'away' from the originally designated websites as it was instructed to (<cite id="97gw9"><a href="#zotero%7C13014974%2FA3AHKIRC">(Brown, 2006)</a></cite>). Because of this archiving methodology, it is not possible to predict in advance what websites are archived or what content they contain. It is possible to manually check the content of the seed list, but with lists of more than a handful of websites, it is not feasible to check all the hyperlinks linking to other websites. For this reason, it is not possible to predict the resulting items in or size of a web crawl. This means that the provenance of the items in the archive is uncertain; we simply do not know what the archive contains and where its content is derived from.
+The Internet Archive started archiving the web in 1996. They began storing websites for preservation and future use. Their collection is not the only available web archive collection, but by far the oldest and most expansive (<cite id="0gz8b"><a href="#zotero%7C13014974%2FT8A4A2LN">(Rackley, 2010)</a></cite>). There are multiple ways to archive websites, and the way it is done has many implications for how the material can be used—a situation that is parallel to how collection and preservation practices impact the use of all other archives. The most comprehensive and widespread way of archiving is through web crawling. In web crawling, a list of desired websites (a seed list) is fed to an archiving software that systematically retrieves the webpages on the list one by one. At each website, the crawler follows all the hyperlinks linking to other websites, and these are also saved. The crawler continues this iterative process as far 'away' from the originally designated websites as it was instructed to (<cite id="97gw9"><a href="#zotero%7C13014974%2FA3AHKIRC">(Brown, 2006)</a></cite>). Because of this archiving methodology, it is not possible to predict in advance what websites are archived or what content they contain. It is possible to manually check the content of the seed list, but with lists of more than a handful of websites, it is not feasible to check all the hyperlinks linking to other websites. For this reason, it is not possible to predict the resulting items or the size of a web crawl. This means that the provenance of the items in the archive is uncertain; we simply do not know what the archive contains and where its content is derived from.
 
-The most common way of interacting with archived websites from the Internet Archive is through their Wayback Machine, which is a URL-based playback engine. The Wayback Machine can be a good entry point if you already know which URLs you are interested in. If you don’t have this knowledge, then the archive can be difficult to explore (<cite id="7edqh"><a href="#zotero%7C13014974%2F4PZKJWL9">(Hartelius, 2020)</a></cite>). When historians are interpreting their questions and working with the archived web it can feel like looking for a needle in a haystack, without being able to grasp the size of the haystack.
+The most common way of interacting with archived websites from the Internet Archive is through their Wayback Machine, which is a URL-based playback engine. The Wayback Machine can be a good entry point if you already know which URLs you are interested in. If you don’t have this knowledge, then the archive can be difficult to explore (<cite id="7edqh"><a href="#zotero%7C13014974%2F4PZKJWL9">(Hartelius, 2020)</a></cite>). When historians are interpreting their questions and working with the archived web, it can feel like looking for a needle in a haystack, without being able to grasp the size of the haystack.
 
-Previous literature has shown that it is primarily scholars with a background in media and information studies rather than historians who have used the archived web as a historical source (<cite id="1q44k"><a href="#zotero%7C13014974%2FZ86YG7B9">(Milligan, 2015)</a></cite>, <cite id="h2jl9"><a href="#zotero%7C13014974%2FVMGM7V76">(Schafer &#38; Thierry, 2018)</a></cite>, <cite id="yldee"><a href="#zotero%7C13014974%2FMEFA9S5G">(Milligan, 2019)</a></cite>). This has resulted in a historiography with a strong focus on the web as a medium. Often it is the web itself, entire top-level domains, or a group of websites which have been central in these investigations (<cite id="22rwb"><a href="#zotero%7C13014974%2FM27V95EN">(Brügger &#38; Milligan, 2019)</a></cite>). This is what Niels Brügger has called history *of* the web: using websites to study the history of websites (<cite id="56gu2"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>). Another way of using the archived web as a source is to conduct history *with* the web: using websites to study the history of broader societal or cultural changes and continuities, or, in other words, using archived web material to do what we might think of as more traditional historical research. This difference in use also entails that historians’ interest in knowledge of provenance differs from how it has been described for the archived web previously (<cite id="ixnae"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>). In the existing descriptions of a website’s provenance, it has been knowledge of the archived version of the website which was the focus (e.g. the time of the crawl). To write a history with the web as a source, it is rather the provenance of its original creation from when it was live online that is pivotal, as this will enable the historian to analyse why it was created, by whom, with what intent, etc. The historian’s understanding of provenance therefore foregrounds the context of the webpage that was once live (even if knowing the provenance of the archived version is, of course, also important).
+Previous literature has shown that it is primarily scholars with a background in media and information studies rather than historians who have used the archived web as a historical source (<cite id="1q44k"><a href="#zotero%7C13014974%2FZ86YG7B9">(Milligan, 2015)</a></cite>, <cite id="h2jl9"><a href="#zotero%7C13014974%2FVMGM7V76">(Schafer &#38; Thierry, 2018)</a></cite>, <cite id="yldee"><a href="#zotero%7C13014974%2FMEFA9S5G">(Milligan, 2019)</a></cite>). This has resulted in a historiography with a strong focus on the web as a medium. Often it is the web itself, entire top-level domains, or a group of websites which have been central in these investigations (<cite id="22rwb"><a href="#zotero%7C13014974%2FM27V95EN">(Brügger &#38; Milligan, 2019)</a></cite>). This is what Niels Brügger has called history *of* the web: using websites to study the history of websites (<cite id="e9xmr"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>). Another way of using the archived web as a source is to conduct history *with* the web: using websites to study the history of broader societal or cultural changes and continuities, or, in other words, using archived web material to do what we might think of as more traditional historical research. This difference in use also entails that historians’ interest in knowledge of provenance differs from how it has been described for the archived web previously (<cite id="ixnae"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>). In the existing descriptions of a website’s provenance, it has been knowledge of the archived version of the website which was the focus (e.g. the time of the crawl). To write a history with the web as a source, it is rather the provenance of its original creation from when it was live online that is pivotal, as this will enable the historian to analyse why it was created, by whom, with what intent, etc. The historian’s understanding of provenance therefore foregrounds the context of the webpage that was once live (even if knowing the provenance of the archived version is, of course, also important).
 
 The possible lack of methodological integrity that can come from working with historical sources using digital methods from other fields is only one pitfall which has been discussed by digital historians (<cite id="aqz4r"><a href="#zotero%7C13014974%2FA3AE6CWL">(Hiltmann, 2022)</a></cite>). Others include lack of transparency and reproducibility when using certain digital tools, as well as the fact that especially text mining tools does not consider change over time (<cite id="7uamw"><a href="#zotero%7C13014974%2FU4YE7LCF">(Guldi, 2023)</a></cite>, <cite id="jbc18"><a href="#zotero%7C13014974%2FD8JRBXDW">(Schwandt, 2022)</a></cite>). In the document discovery method, we have aimed to create transparency in the use of the LLM by documenting the processes for data collection, pre-processing, prompting and specific LLM processing, by using the possibilities for transparency provided by the Journal of Digital History.
 <!-- #endregion -->
@@ -97,11 +98,11 @@ The possible lack of methodological integrity that can come from working with hi
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"2kquo": [{"id": "13014974/YPXEER39", "source": "zotero"}], "3hmw5": [{"id": "13014974/SXLWFB6V", "source": "zotero"}], "8qwro": [{"id": "13014974/M5LZ38BE", "source": "zotero"}], "w0jh7": [{"id": "13014974/E4JPU32E", "source": "zotero"}], "x8jvr": [{"id": "13014974/MXG3KLIA", "source": "zotero"}], "xb8v8": [{"id": "13014974/SXLWFB6V", "source": "zotero"}], "xrmtk": [{"id": "13014974/BD33C2S7", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
-For the past to become history, a set of sources must be interpreted and be presented as part of an argument (<cite id="2kquo"><a href="#zotero%7C13014974%2FYPXEER39">(<i>Digital History &#38; Argument White Paper – Roy Rosenzweig Center for History and New Media</i>, n.d.)</a></cite>). Historical enquiry begins with a question or a wonder, and the resulting research is closely tied to the research question that the historian has asked (<cite id="3hmw5"><a href="#zotero%7C13014974%2FSXLWFB6V">(Schrag, 2021)</a></cite>). The questions are then tackled through a search for sources and an investigation of the often-complex material to conduct a historical analysis of the topic under investigation (<cite id="x8jvr"><a href="#zotero%7C13014974%2FMXG3KLIA">(Iggers, 1997)</a></cite>). Searching for sources, analysing them and placing one's study within the existing historiography is part of a dialectic process which informs and hones the questions the historian asks (<cite id="xb8v8"><a href="#zotero%7C13014974%2FSXLWFB6V">(Schrag, 2021)</a></cite>). Today framing of research questions can also be helped by digital tools (<cite id="w0jh7"><a href="#zotero%7C13014974%2FE4JPU32E">(Gibbs &#38; Owens, 2013)</a></cite>). No matter how historians are asking, framing, or exploring their questions, a problem-driven approach has long been the norm, meaning that the search for sources is driven by the questions asked.
+For the past to become history, a set of sources must be interpreted and be presented as part of an argument. Historical enquiry begins with a question or a wonder, and the resulting research is closely tied to the research question that the historian has asked (<cite id="3hmw5"><a href="#zotero%7C13014974%2FSXLWFB6V">(Schrag, 2021)</a></cite>). The questions are then tackled through a search for sources and an investigation of the often-complex material to conduct a historical analysis of the topic under investigation (<cite id="x8jvr"><a href="#zotero%7C13014974%2FMXG3KLIA">(Iggers, 1997)</a></cite>). Searching for sources, analysing them and placing one's study within the existing historiography is part of a dialectic process which informs and hones the questions the historian asks (<cite id="xb8v8"><a href="#zotero%7C13014974%2FSXLWFB6V">(Schrag, 2021)</a></cite>). Today, framing of research questions can also be helped by digital tools (<cite id="w0jh7"><a href="#zotero%7C13014974%2FE4JPU32E">(Gibbs &#38; Owens, 2013)</a></cite>). No matter how historians ask, frame, or explore their questions, a problem-driven approach has long been the norm, meaning that the search for sources is driven by the questions asked.
 
-Archival discovery plays a central role in the problem driven approach, as it is central to the source criticism that is at the center when answering a research question. By providing crucial context about a source’s provenance, the systems in place for collection and curation of sources help to judge the context in which the source was made (<cite id="8qwro"><a href="#zotero%7C13014974%2FM5LZ38BE">(Putnam, 2016)</a></cite>, <cite id="xrmtk"><a href="#zotero%7C13014974%2FBD33C2S7">(Jensen, 2021)</a></cite>). This context helps us understand who created the source and why. As mentioned above, knowing the context of archived web material is extremely difficult. This is a great contrast to consulting a physical or digitised archive. Here historians often know what to expect from the archive. For instance, one would expect to find newspapers in a newspaper archive, government papers in a government archive, and correspondence by letters in a personal archive from the 18th century. Usually, one would also know which newspapers were included in the newspaper archive, what government office to find papers from in which part of the collection from a certain government and which person that was central in the personal archive. This is not the case with web archives. They can have all kinds of textual expressions (in the broadest sense) from anyone (with the technical skills, hardware, and access needed).
+Archival discovery plays a central role in the problem-driven approach, as it is central to the source criticism that is at the centre when answering a research question. By providing crucial context about a source’s provenance, the systems in place for collection and curation of sources help to judge the context in which the source was made (<cite id="8qwro"><a href="#zotero%7C13014974%2FM5LZ38BE">(Putnam, 2016)</a></cite>, <cite id="xrmtk"><a href="#zotero%7C13014974%2FBD33C2S7">(Jensen, 2021)</a></cite>). This context helps us understand who created the source and why. As mentioned above, knowing the context of archived web material is extremely difficult. This is a great contrast to consulting a physical or digitised archive. Here, historians often know what to expect from the archive. For instance, one would expect to find newspapers in a newspaper archive, government papers in a government archive, and correspondence by letters in a personal archive from the 18th century. Usually, one would also know which newspapers were included in the newspaper archive, which government office to find papers from, which part of the collection from a certain government and which person was central in the personal archive. This is not the case with web archives. They can have all kinds of textual expressions (in the broadest sense) from anyone (with the technical skills, hardware, and access needed).
 
-Archived web material is, like all historical archives, an incomplete record, with not all sites, nor all elements on a given site, being preserved. The central challenge in working with archived web material is nonetheless that there is too much of it. It is not feasible to read individual pages manually even for a relatively small corpus, meaning that some form of distant or targeted reading is required. One promising strategy to find relevant sources in the age of abundance is to conduct LLM-assisted document discovery.
+Archived web material is, like all historical archives, an incomplete record, with not all sites, nor all elements on a given site, being preserved. The central challenge in working with archived web material is nonetheless that there is too much of it. It is not feasible to read individual pages manually, even for a relatively small corpus, meaning that some form of distant or targeted reading is required. One promising strategy to find relevant sources in the age of abundance is to conduct LLM-assisted document discovery.
 
 <!-- #endregion -->
 
@@ -112,11 +113,11 @@ Archived web material is, like all historical archives, an incomplete record, wi
 <!-- #region citation-manager={"citations": {"1x3f9": [{"id": "13014974/UBWELQHJ", "source": "zotero"}], "4lvn8": [{"id": "13014974/M2BM4YLQ", "source": "zotero"}], "7cmfe": [{"id": "13014974/XPKGWRJ3", "source": "zotero"}], "7uamw": [{"id": "13014974/U4YE7LCF", "source": "zotero"}], "aqz4r": [{"id": "13014974/A3AE6CWL", "source": "zotero"}], "jbc18": [{"id": "13014974/D8JRBXDW", "source": "zotero"}], "m5xj1": [{"id": "13014974/4T525T4G", "source": "zotero"}], "wkbyb": [{"id": "13014974/ARKRT8VZ", "source": "zotero"}], "x6zb7": [{"id": "13014974/BNPP5TCN", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
 The most common method in history is still close reading of text (<cite id="m5xj1"><a href="#zotero%7C13014974%2F4T525T4G">(Ohrvik, 2024)</a></cite>). However, the number of available sources has skyrocketed with the emergence of the World Wide Web in the 1990’s and 2000’s, digitisation of source material and a multitude of born-digital sources and the ways in which historians consult their sources have changed (<cite id="x6zb7"><a href="#zotero%7C13014974%2FBNPP5TCN">(Milligan, 2022)</a></cite>, <cite id="4lvn8"><a href="#zotero%7C13014974%2FM2BM4YLQ">(Blouin &#38; Rosenberg, 2011)</a></cite>).
 
-When historians work with digital sources from a quantitative, distant reading perspective, they usually know what their sources consists of. They know whether they are censuses, newspapers, petitions, etc. They also know the record producer (government, petitioners e.g.). Newspapers might be a more exceptional case as they have many different contributors, which is why users have complained about the ‘noise’ in newspaper archives (<cite id="fg5ul"><a href="#zotero%7C13014974%2F4WPBFKJ3">(Jarlbrink &#38; Snickars, 2017)</a></cite>). As mentioned above, this homogeneity is not the case with the archived web. Here, we face an unprecedented amount of material with very little knowledge of the provenance of the sources we interpret.
+When historians work with digital sources from a quantitative, distant reading perspective, they usually know what their sources consist of. They know whether they are censuses, newspapers, petitions, etc. They also know the record producer (government, petitioners e.g.). Newspapers might be a more exceptional case as they have many different contributors, which is why users have complained about the ‘noise’ in newspaper archives (<cite id="fg5ul"><a href="#zotero%7C13014974%2F4WPBFKJ3">(Jarlbrink &#38; Snickars, 2017)</a></cite>). As mentioned above, this homogeneity is not the case with the archived web. Here, we face an unprecedented amount of material with very little knowledge of the provenance of the sources we interpret.
 
-The complexity of using archived web material as a source thus to some extend defies recent calls in digital history to put the sources and historical domain expertise first, because we do not know the data (<cite id="aqz4r"><a href="#zotero%7C13014974%2FA3AE6CWL">(Hiltmann, 2022)</a></cite>, <cite id="wkbyb"><a href="#zotero%7C13014974%2FARKRT8VZ">(Crowston &#38; Lemercier, 2019)</a></cite>, <cite id="7cmfe"><a href="#zotero%7C13014974%2FXPKGWRJ3">(Jensen et al., 2024)</a></cite>). However, what we propose below is a method for finding relevant sources in a vast and messy pile of material. The methodology has been applied to a smaller test corpus of 9,267 sources and afterwards to a corpus consisting of all archived material from the domain kidlink.org. 
+The complexity of using archived web material as a source thus to some extend defies recent calls in digital history to put the sources and historical domain expertise first, because we do not know the data (<cite id="ojn4i"><a href="#zotero%7C13014974%2FA3AE6CWL">(Hiltmann, 2022)</a></cite>, <cite id="wkbyb"><a href="#zotero%7C13014974%2FARKRT8VZ">(Crowston &#38; Lemercier, 2019)</a></cite>, <cite id="7cmfe"><a href="#zotero%7C13014974%2FXPKGWRJ3">(Jensen et al., 2024)</a></cite>). However, what we propose below is a method for finding relevant sources in a vast and messy pile of material. The methodology has been applied to a smaller test corpus of 9,267 sources and afterwards to a corpus consisting of all archived material from the domain kidlink.org. 
 
-The Kidlink domain started as an idea with a rather controlled and limited scope as part of a weeklong festival celebrating children’s culture (<cite id="ym5a9"><a href="#zotero%7C13014974%2FM8SBUIIL">(“Datakontakt Med Heila Verda,” 1992)</a></cite>). Originally, the founder Odd de Presno wanted his daughter to chat with a granddaughter of an American friend using a big screen to display the two girls live chat on the Internet. But the word about the idea of transatlantic communication for children spread, and in the 14 days leading up to the festival, more than 260 children from Norway, the United States and Canada had used the network.  After the festival, the project continued running, now under the name Kidlink. During the next year, more than 26,000 kids from 31 countries participated in the Internet-based communication exchange (<cite id="x7nsb"><a href="#zotero%7C13014974%2FTPFH3GFB">(Mizell &#38; Others, 1992)</a></cite>).
+The Kidlink domain started as an idea with a rather controlled and limited scope as part of a weeklong festival celebrating children’s culture (<cite id="ym5a9"><a href="#zotero%7C13014974%2FM8SBUIIL">(“Datakontakt Med Heila Verda,” 1992)</a></cite>). Originally, the founder Odd de Presno wanted his daughter to chat with a granddaughter of an American friend using a big screen to display the two girls' live chat on the Internet. But the word about the idea of transatlantic communication for children spread, and in the 14 days leading up to the festival, more than 260 children from Norway, the United States and Canada had used the network.  After the festival, the project continued running, now under the name Kidlink. During the next year, more than 2,600 kids from 31 countries participated in the Internet-based communication exchange (<cite id="x7nsb"><a href="#zotero%7C13014974%2FTPFH3GFB">(Mizell &#38; Others, 1992)</a></cite>).
 
 This corpus of Kidlink material consists of 384,700 sources in total, of which 293,679 are textual records. With this approach, we develop a digital method for document discovery that reflects how historians work. We preserve the complexity and the messy nature of the historical sources that were the past web that produced a great variety and complexity in provenance.
 <!-- #endregion -->
@@ -126,7 +127,7 @@ This corpus of Kidlink material consists of 384,700 sources in total, of which 2
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"0wtoj": [{"id": "13014974/2F7XDPYF", "source": "zotero"}], "2ljcf": [{"id": "13014974/R6DMZBGE", "source": "zotero"}], "32i0h": [{"id": "13014974/VG77SSLT", "source": "zotero"}], "3rmrp": [{"id": "13014974/5MS8Y9E4", "source": "zotero"}], "42sbr": [{"id": "13014974/F7B6QW9F", "source": "zotero"}], "4egpc": [{"id": "13014974/R6DMZBGE", "source": "zotero"}], "ckoy9": [{"id": "13014974/HZ8VZRCQ", "source": "zotero"}], "fi71m": [{"id": "", "source": "zotero"}], "fxfoa": [{"id": "13014974/FXKB3AE7", "source": "zotero"}], "gk0yy": [{"id": "13014974/QG4UX8UE", "source": "zotero"}], "kh31u": [{"id": "13014974/U4NRYK6X", "source": "zotero"}], "ldgup": [{"id": "13014974/DQHCMEA2", "source": "zotero"}], "s3l68": [{"id": "13014974/M5LZ38BE", "source": "zotero"}], "to33u": [{"id": "13014974/QG4UX8UE", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
-Historians have pointed out a number of problems with keyword searching in vast digital collections (<cite id="42sbr"><a href="#zotero%7C13014974%2FF7B6QW9F">(Hitchcock, 2013)</a></cite>, <cite id="s3l68"><a href="#zotero%7C13014974%2FM5LZ38BE">(Putnam, 2016)</a></cite>). The concerns have been raised for multiple types of material, ranging from digitised newspaper collections with bad OCR quality to web archive collections with millions of documents returning an abundance of results (<cite id="ckoy9"><a href="#zotero%7C13014974%2FHZ8VZRCQ">(Torget, 2023)</a></cite>,<cite id="gk0yy"><a href="#zotero%7C13014974%2FQG4UX8UE">(Winters &#38; Prescott, 2019)</a></cite>). The issue of discoverability of sources in born-digital cultural heritage collections is also discussed in the field of archival studies. This field has seen the use of LLMs for metadata enhancement and curatorial work with large collections, most of these are still on an exploratory level (<cite id="4egpc"><a href="#zotero%7C13014974%2FR6DMZBGE">(Canning &#38; Jaillant, 2025)</a></cite>, <cite id="3rmrp"><a href="#zotero%7C13014974%2F5MS8Y9E4">(Baron, 2025)</a></cite>, <cite id="0wtoj"><a href="#zotero%7C13014974%2F2F7XDPYF">(Reusens et al., 2025)</a></cite>). Canning and Jaillant argue that heritage institutions need to apply automated curatorial practices when they take material into their collections as part of the appraisal of material (<cite id="2ljcf"><a href="#zotero%7C13014974%2FR6DMZBGE">(Canning &#38; Jaillant, 2025)</a></cite>). The practice of appraising born-digital material before it becomes part of a collection contrasts how web archive collections have been collected up until now. Most often, no such curation has been applied to web archive collections. These collections are big and messy and require new ways of searching (<cite id="to33u"><a href="#zotero%7C13014974%2FQG4UX8UE">(Winters &#38; Prescott, 2019)</a></cite>). We believe that a methodological approach as the one presented in this article can be used as a new way of finding relevant sources in web archives for a specific research question.
+Historians have pointed out several problems with keyword searching in vast digital collections (<cite id="42sbr"><a href="#zotero%7C13014974%2FF7B6QW9F">(Hitchcock, 2013)</a></cite>, <cite id="s3l68"><a href="#zotero%7C13014974%2FM5LZ38BE">(Putnam, 2016)</a></cite>). The concerns have been raised for multiple types of material, ranging from digitised newspaper collections with bad OCR quality to web archive collections with millions of documents returning an abundance of results (<cite id="ckoy9"><a href="#zotero%7C13014974%2FHZ8VZRCQ">(Torget, 2023)</a></cite>,<cite id="gk0yy"><a href="#zotero%7C13014974%2FQG4UX8UE">(Winters &#38; Prescott, 2019)</a></cite>). The issue of discoverability of sources in born-digital cultural heritage collections is also discussed in the field of archival studies. This field has seen the use of LLMs for metadata enhancement and curatorial work with large collections, most of these are still on an exploratory level (<cite id="4egpc"><a href="#zotero%7C13014974%2FR6DMZBGE">(Canning &#38; Jaillant, 2025)</a></cite>, <cite id="3rmrp"><a href="#zotero%7C13014974%2F5MS8Y9E4">(Baron, 2025)</a></cite>, <cite id="0wtoj"><a href="#zotero%7C13014974%2F2F7XDPYF">(Reusens et al., 2025)</a></cite>). Canning and Jaillant argue that heritage institutions need to apply automated curatorial practices when they take material into their collections as part of the appraisal of material (<cite id="2ljcf"><a href="#zotero%7C13014974%2FR6DMZBGE">(Canning &#38; Jaillant, 2025)</a></cite>). The practice of appraising born-digital material before it becomes part of a collection contrasts with how web archive collections have been collected up until now. Most often, no such curation has been applied to web archive collections. These collections are big and messy and require new ways of searching (<cite id="to33u"><a href="#zotero%7C13014974%2FQG4UX8UE">(Winters &#38; Prescott, 2019)</a></cite>). We believe that a methodological approach, such as the one presented in this article, can be used as a new way of discovering relevant sources in web archives for a specific research question.
 
 Previous solutions for working with archived web data from an analytical perspective have mostly focused on the work which takes place when a corpus has already been identified (<cite id="ldgup"><a href="#zotero%7C13014974%2FDQHCMEA2">(Ruest et al., 2022)</a></cite>, <cite id="fxfoa"><a href="#zotero%7C13014974%2FFXKB3AE7">(Sherratt et al., n.d.)</a></cite>). We, however, want to identify relevant sources within a vast web archive collection. Drawing on user-centred perspectives from archival studies, it can be argued that the traditional approach for historians is not the approach that earlier developed methods and approaches have been developed for (<cite id="32i0h"><a href="#zotero%7C13014974%2FVG77SSLT">(Nix et al., 2025)</a></cite>). One of the only other instances of work that starts from the historian’s perspective has tried to identify what researchers need in terms of search and discovery when working with such archives (<cite id="fi71m"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>). They describe the difficulty of curating a set of websites in relation to a theme, because it might only be subsections of very large sites that are of interest. What they suggest is to: “seed an automated approach, by compiling a list of keywords, by selecting a few exemplar websites, or perhaps by using the Wikipedia entry for an event of interest. The web sphere idea could mitigate against the complexity identified in the extraction of hierarchies by curating pages around a concept, which could be a government function without explicitly defining its position in a hierarchy.” (<cite id="kh31u"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>).
 
@@ -139,7 +140,7 @@ What we see in this quote is the centring of a problem-driven approach that can 
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
-As introduced above, the archived web has seldom been used as a source for historical research. This section presents and explores our methodological approach which can be seen as an alternative to traditional search in vast collections. The following section presents how the method has been developed and on what material it has been tested. The methodology consists of multiple parts such as finding test material and creating categories based on domain specific questions for the document discovery framework.
+As introduced above, the archived web has seldom been used as a source for historical research. This section presents and explores our methodological approach, which can be seen as an alternative to traditional search in vast collections. The following section presents how the method has been developed and on what material it has been tested. The methodology consists of multiple parts, such as finding test material and creating categories based on domain-specific questions for the document discovery framework.
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
@@ -147,19 +148,19 @@ As introduced above, the archived web has seldom been used as a source for histo
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"6vzpx": [{"id": "", "source": "zotero"}], "6w4po": [{"id": "", "source": "zotero"}], "7edqh": [{"id": "", "source": "zotero"}], "84pxm": [{"id": "", "source": "zotero"}], "art3o": [{"id": "", "source": "zotero"}], "fo2lr": [{"id": "", "source": "zotero"}], "gsghp": [{"id": "", "source": "zotero"}], "i7rhf": [{"id": "", "source": "zotero"}], "jgq2b": [{"id": "", "source": "zotero"}], "k3526": [{"id": "", "source": "zotero"}], "l1gse": [{"id": "", "source": "zotero"}], "lho4h": [{"id": "", "source": "zotero"}], "nqxdl": [{"id": "", "source": "zotero"}], "pnz9d": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-As mentioned, it was important for us to find a method for document discovery that was guided by a research question. The research question which has guided our interest here is how the early web changed childhoods between 1995 and 2005. This is, of course, a very broad question, but it is also a good match for setting up broad, but focused topic that can be operationalised into recognisable semantic fields. Answering this question would mean looking for sites that children produced; that were targeting children; where children contributed; or where adults addressed issues related to children.
+As mentioned, it was important for us to find a method for document discovery that was guided by a research question. The research question which has guided our interest here is how the early web changed childhoods between 1995 and 2005. This is, of course, a very broad question, but it is also a good match for setting up a broad but focused topic that can be operationalised into recognisable semantic fields. Answering this question would mean looking for sites that children produced; that were targeting children; where children contributed; or where adults addressed issues related to children.
 
-Due to limited resources, we could not test our method on all the archived web material we currently have in our possession: more than 50TB, including e.g. all archived Danish websites from between 1996 and 2006 as well as many sites in English. Instead, we wanted a smaller, more manageable corpus which we knew contained some sites that likely helped us answer our research question.
+Due to limited resources, we could not test our method on all the archived web material we currently have in our possession: more than 50TB, including, e.g. all archived Danish websites from between 1996 and 2006, as well as many sites in English. Instead, we wanted a smaller, more manageable corpus that we knew contained some sites likely to help us answer our research question.
 
-The test corpus for the method proposed here consists of archived websites from the Internet Archive. The sites chosen for the test comes from a big, manually extracted and curated corpus of URLs from printed internet guidebooks for children from the 1990s and 2000s. These sites include web pages made for or by children as well as general sites, e.g. the pages of the Louvre, discussion fora, web hotels, the White House, etc. (<cite id="jgq2b"><a href="#zotero%7C13014974%2FS7ED2JDT">(Benson &#38; Fodemski, 1999)</a></cite>,<cite id="k3526"><a href="#zotero%7C13014974%2F2GXYAT9J">(Larsen &#38; Thomsen, 1997)</a></cite>,<cite id="lho4h"><a href="#zotero%7C13014974%2FGKCQ4C2Q">(Larsen &#38; Thomsen, 1997b)</a></cite>, <cite id="84pxm"><a href="#zotero%7C13014974%2FU43GVZUX">(Larsen &#38; Thomsen, 1998)</a></cite>,<cite id="6w4po"><a href="#zotero%7C13014974%2FSY5ZK3AG">(Larsen &#38; Thomsen, 1996)</a></cite>,<cite id="6vzpx"><a href="#zotero%7C13014974%2FQ9AIA37U">(Larsen, 1998)</a></cite>).
+The test corpus for the method proposed here consists of archived websites from the Internet Archive. The Internet Archive was the first institution to start archiving the web. As mentioned, they started archiving in 1996 (<cite id="qk1qd"><a href="#zotero%7C13014974%2FT8A4A2LN">(Rackley, 2010)</a></cite>). No other web archive has preserved content this early. When investigating a research question that targets the period 1995 to 2005, sources from web archives most often originate from the Internet Archive. Other web archives exist. Web archiving is often conducted by National Libraries such as the Royal Danish Library. The Danish web archive operates through a legal deposit framework and has been preserving websites since 2004. However, they have not collected any material before 2004. The Royal Danish Library has bought material from the Internet Archive to cover the period before it started collecting itself. By extracting the material from the Internet Archive, the workflow is reproducible in every step from data collection, over classification, to cherry picking of relevant documents. This would not have been the case if material were to be extracted from a closed archive such as the Danish web archive. 
+
+The sites chosen for the test come from a big, manually extracted and curated corpus of URLs from printed internet guidebooks for children from the 1990s and 2000s. These sites include web pages made for or by children as well as general sites, e.g. the pages of the Louvre, discussion fora, web hotels, the White House, etc. (<cite id="jgq2b"><a href="#zotero%7C13014974%2FS7ED2JDT">(Benson &#38; Fodemski, 1999)</a></cite>,<cite id="k3526"><a href="#zotero%7C13014974%2F2GXYAT9J">(Larsen &#38; Thomsen, 1997)</a></cite>,<cite id="lho4h"><a href="#zotero%7C13014974%2FGKCQ4C2Q">(Larsen &#38; Thomsen, 1997b)</a></cite>, <cite id="84pxm"><a href="#zotero%7C13014974%2FU43GVZUX">(Larsen &#38; Thomsen, 1998)</a></cite>,<cite id="6w4po"><a href="#zotero%7C13014974%2FSY5ZK3AG">(Larsen &#38; Thomsen, 1996)</a></cite>,<cite id="6vzpx"><a href="#zotero%7C13014974%2FQ9AIA37U">(Larsen, 1998)</a></cite>).
 
 The overall guidebook dataset currently consists of more than 3000 URLs and is a work in progress (<cite id="2nhwn"><a href="#zotero%7C13014974%2FJZSVEEYI">(Kjeldsen, 2026)</a></cite>). The initial test corpus for this article consists of a subset of 85 URLs from the overall dataset (<cite id="nqxdl"><a href="#zotero%7C13014974%2FYLMQE34P">(Kjeldsen &#38; Johnston, 2026)</a></cite>). The limit was set as we did not know how much compute time we would need for the processing when we began.
 
-The most common way of interacting with archived websites from the Internet Archive is through their Wayback Machine, which is a URL based playback engine. The Wayback Machine can be a good entry point, when you already know which URLs you are interested in. If you don’t have this knowledge, then the archive can be difficult to explore (<cite id="7edqh"><a href="#zotero%7C13014974%2F4PZKJWL9">(Hartelius, 2020)</a></cite>). When historians are interpreting their questions and working with the archived web it can feel like looking for a needle in a haystack, without being able to grasp the size of the haystack.
+The way we have retrieved material from these 85 URLS is through a tool, which downloades resources from the Internet Archive and package the sources as WARC files (The international standard fileformat for web archive files) (<cite id="i7rhf"><a href="#zotero%7C13014974%2FVJYN5J7B">(Johnston &#38; Thøgersen, 2026)</a></cite>, <cite id="pnz9d"><a href="#zotero%7C13014974%2FWUGFM4ZU">(Maemura, 2023)</a></cite>). This is fundamentally different from URL-based lookups through Wayback Machine. This method can be seen as part of one of the more computationally advanced methods of interacting with sources from the archived web. Other computational methods for working with webarchives could be to either scrape material directly or compare CDX indexes, if they are public (<cite id="art3o"><a href="#zotero%7C13014974%2F7EURECX3">(Arora et al., 2016)</a></cite>, <cite id="l1gse"><a href="#zotero%7C13014974%2FTCT6SE2I">(Nielsen et al., 2025)</a></cite>, <cite id="fo2lr"><a href="#zotero%7C13014974%2FG2LN3FW9">(Noguera et al., 2025)</a></cite>). When the archive is public, which is the case with the Internet Archive, the CDX index can be used to extract material for further analysis, which is what we have done here. As mentioned above, the archived web is highly fragmented. This fragmentation is also present in the corpus that we are working with (<cite id="gsghp"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>).
 
-The way we have retrieved material from these 85 URLS is  through a tool, which downloades resources from the Internet Archive and package the sources as WARC files (The international standard fileformat for web archive files) (<cite id="i7rhf"><a href="#zotero%7C13014974%2FVJYN5J7B">(Johnston &#38; Thøgersen, 2026)</a></cite>, <cite id="pnz9d"><a href="#zotero%7C13014974%2FWUGFM4ZU">(Maemura, 2023)</a></cite>). This method can be seen as part of one of the more computationally advanced methods of interacting with sources from the archived web. Other computational methods for working with webarchives could be to either scrape material directly or compare CDX indexes, if they are public (<cite id="art3o"><a href="#zotero%7C13014974%2F7EURECX3">(Arora et al., 2016)</a></cite>, <cite id="l1gse"><a href="#zotero%7C13014974%2FTCT6SE2I">(Nielsen et al., 2025)</a></cite>, <cite id="fo2lr"><a href="#zotero%7C13014974%2FG2LN3FW9">(Noguera et al., 2025)</a></cite>). When the archive is public, which is the case with the Internet Archive, the CDX index can be used to extract material for further analysis which is what we have done here. As mentioned above the archived web is highly fragmented. This fragmentation is also present in the corpus that we are working with (<cite id="gsghp"><a href="#zotero%7C13014974%2FYRJU2TH6">(Brügger, 2018)</a></cite>).
-
-The resulting corpus from querying the Internet Archive for these 85 URLs with the method described above is a WARC file with 9267 resources, where 80.6% of the resources are HTML files and almost everything else are images of some kind.
+The resulting corpus from querying the Internet Archive for these 85 URLs with the method described above is a WARC file with 9267 resources, where 80.6% of the resources are HTML files and almost everything else is images of some kind.
 
 <!-- #endregion -->
 
@@ -181,107 +182,13 @@ display(Image("./media/warc_distribution_run1.png"), metadata=metadata)
 ```
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-The distribution in the pie chart above can be created for any WARC file by running the following script. It can also be found in the [WEBCHILD Github repository](https://github.com/WEB-CHILD/Scripts/blob/main/warc_content_pie.py){:target="_blank"}:
+The distribution in the pie chart above can be created for any WARC file by running an overview script that can be found in the [WEBCHILD Github repository](https://github.com/WEB-CHILD/Scripts/blob/main/warc_content_pie.py){:target="_blank"}.
 <!-- #endregion -->
 
-```python editable=true slideshow={"slide_type": ""} tags=["hermeneutics"]
-# This cell is used to define the %%skip command.
-# Which makes it possible to print the script below,
-# without running it in the article.
-from IPython.core.magic import register_cell_magic
-
-@register_cell_magic
-def skip(line, cell):
-    pass  # Do nothing
-
-```
-
-```python editable=true slideshow={"slide_type": ""} tags=["hermeneutics"]
-%%skip # Skipping output
-import warcio
-from warcio.archiveiterator import ArchiveIterator
-from collections import Counter
-import matplotlib.pyplot as plt
-import argparse
-
-parser = argparse.ArgumentParser(description='Plot MIME type distribution from a WARC file')
-parser.add_argument('warc_file', help='Path to the input WARC or WARC.GZ file')
-parser.add_argument('--output', '-o', help='Optional path to save the pie chart image (e.g., pie.png)')
-parser.add_argument('--min-percent', type=float, default=1.0, help='Minimum percent threshold; types below this are grouped into "Other" (default: 1.0)')
-args = parser.parse_args()
-
-# Define colors here. Set PALETTE to either:
-# - a matplotlib colormap name (string) to sample colors from, e.g. 'tab20'
-# - a Python list of color strings (e.g. ['#e41a1c', '#377eb8', '#4daf4a'])
-# - None to use matplotlib defaults
-PALETTE = 'Pastel2'
-
-warc_file_path = args.warc_file
-
-# Collect MIME types
-mime_types = []
-
-with open(warc_file_path, 'rb') as stream:
-    for record in ArchiveIterator(stream):
-        if record.rec_type == 'response':
-            content_type = record.http_headers.get_header('Content-Type')
-            if content_type:
-                # Some Content-Types have parameters like charset, so split them
-                mime_type = content_type.split(';')[0].strip()
-                mime_types.append(mime_type)
-
-# Count occurrences of each MIME type
-mime_counter = Counter(mime_types)
-
-# Prepare data for pie chart, grouping small categories into 'Other'
-total = sum(mime_counter.values())
-min_pct = max(0.0, args.min_percent) / 100.0
-
-labels = []
-sizes = []
-other_count = 0
-
-for mime, count in mime_counter.most_common():
-    pct = count / total if total > 0 else 0
-    if pct < min_pct:
-        other_count += count
-    else:
-        labels.append(mime)
-        sizes.append(count)
-
-if other_count > 0:
-    labels.append('Other')
-    sizes.append(other_count)
-
-# Create pie chart
-plt.figure(figsize=(10, 8))
-# Determine colors from PALETTE defined in the file
-colors = None
-if PALETTE:
-    if isinstance(PALETTE, (list, tuple)):
-        colors = list(PALETTE)
-    elif isinstance(PALETTE, str):
-        try:
-            cmap = plt.get_cmap(PALETTE)
-            colors = [cmap(i / max(1, len(sizes) - 1)) for i in range(len(sizes))]
-        except Exception:
-            # If colormap lookup fails, leave colors as None to use defaults
-            colors = None
-
-plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, colors=colors)
-plt.title('MIME Type Distribution in WARC File')
-plt.axis('equal')  # Equal aspect ratio ensures the pie chart is circular
-if args.output:
-    plt.savefig(args.output, bbox_inches='tight')
-    print(f"Saved pie chart to {args.output}")
-else:
-    plt.show()
-```
-
 <!-- #region citation-manager={"citations": {"64mjc": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-A previous paper using an LLM for classification purposes showed that the LLM performed well on markdown documents (<cite id="64mjc"><a href="#zotero%7C13014974%2FVV764MP6">(Green et al., 2024)</a></cite>). Using this insight, we converted the individual HTML files from within the WARC files to markdown files before they were given to the LLM. To ensure that we can return to the original archived file from the markdown rendered version, our conversion tool prepends each created markdown file with the URL, for transparency and to the archived version of the file can be found in the Internet Archive.
+A previous paper using an LLM for classification purposes showed that the LLM performed well on markdown documents (<cite id="64mjc"><a href="#zotero%7C13014974%2FVV764MP6">(Green et al., 2024)</a></cite>). Using this insight, we converted the individual HTML files from within the WARC files to markdown files before they were given to the LLM. To ensure that we can return to the original archived file from the markdown rendered version, our conversion tool prepends each created markdown file with the URL, for transparency, and it makes it so that the archived version of the file can be found in the Internet Archive.
 
-By including the archived URL in the rendered markdown and having the corpus available as a WARC file we ensure, we can access the archived source and perform a close reading of the archived site in all tools that support WARC, e.g. PyWb, SolrWayback or replayweb.page. These are all highly central tools in the webarchiving community and are built around the WARC standard. Relying on the WARC standard is important as this gives the workflow a connection to existing tools for working with sources from the archived web. Furthermore, it makes the method proposed in this article easier to apply for others working with archived web. By also choosing markdown as the input for the AI processing, it becomes applicable for scholars working with different materials than the archived web.
+By including the archived URL in the rendered markdown and having the corpus available as a WARC file, we ensure that we can access the archived source and perform a close reading of the archived site in all tools that support WARC, e.g. PyWb, SolrWayback or replayweb.page. These are all highly central tools in the webarchiving community and are built around the WARC standard. Relying on the WARC standard is important as this gives the workflow a connection to existing tools for working with sources from the archived web. Furthermore, it makes the method proposed in this article easier to apply for others working with archived web. By also choosing markdown as the input for the AI processing, it becomes applicable for scholars working with materials other than the archived web.
 
 <!-- #endregion -->
 
@@ -290,7 +197,7 @@ By including the archived URL in the rendered markdown and having the corpus ava
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"x672j": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-We are interested in exploring and interpreting sources that can help us answer specific questions. To achieve a problem-driven approach to document discovery we initially created 21 topics related to our childhood history interests. These topics, the LLM uses to analyse if a given source from the corpus can provide insights into that category. They are described in individual files as the ones presented below, following Open AIs prompting strategies (<cite id="x672j"><a href="#zotero%7C13014974%2F4YGYPC4J">(Open AI, 2026)</a></cite>). The category examples below are about 1) the explicit mentioning of age, something we know is frequent in childrens' text, 2) spelling mistakes, also something we know is often present in children's writing: 
+We are interested in exploring and interpreting sources that can help us answer specific questions. To achieve a problem-driven approach to document discovery, we initially created 21 topics related to our childhood history interests. These topics the LLM uses to analyse if a given source from the corpus can provide insights into that category. They are described in individual files as the ones presented below, following Open AI's prompting strategies (<cite id="x672j"><a href="#zotero%7C13014974%2F4YGYPC4J">(Open AI, 2026)</a></cite>). The category examples below are about 1) the explicit mentioning of age, something we know is frequent in children's text, and 2) spelling mistakes, also something we know is often present in children's writing: 
 
 <!-- #endregion -->
 
@@ -327,19 +234,19 @@ prompt: |
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"5frso": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-Each topic contains a prompt for the LLM. This prompt is central to make the LLM understand what it should look for in the sources. The process of creating categories for the LLM is where domain expertise is essential. The categories for this article have been constructed from close readings of a vast number of newspapers from the period, Internet guidebooks for children, secondary literature, other media, and the archived web itself. The categories have been constructed from months of working with sources in and around the corpus. The close reading of the sources and other contextual works makes the produced categories more relevant, as we have learned through the close readings what is of interest in the corpus (<cite id="5frso"><a href="#zotero%7C13014974%2F4T525T4G">(Ohrvik, 2024)</a></cite>). Additionally, some of the categories have been enhanced with informal knowledge from lived experience.[^1](#note1)
+Each topic contains a prompt for the LLM. This prompt is central to making the LLM understand what it should look for in the sources. The process of creating categories for the LLM is where domain expertise is essential. The categories for this article have been constructed from close readings of a vast number of newspapers from the period, Internet guidebooks for children, secondary literature, other media, and the archived web itself. The categories have been constructed from months of working with sources in and around the corpus. The close reading of the sources and other contextual works makes the produced categories more relevant, as we have learned through the close readings what is of interest in the corpus (<cite id="5frso"><a href="#zotero%7C13014974%2F4T525T4G">(Ohrvik, 2024)</a></cite>). Additionally, some of the categories have been enhanced with informal knowledge from lived experience (as two of the authors were children in the period that the article is interested in, examples from their childhood were included when constructing the categories. This resembles a postphenomenological approach to using one’s own lived experience. For examples, see: (<cite id="94l0n"><a href="#zotero%7C13014974%2F2S7NF3RT">(Ihde, 2010)</a></cite>).
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "anchor1"] -->
 ## Building document-level binary classifications through inference
 <!-- #endregion -->
 
 <!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-Retrieval Augmented Generation (RAG) operates by embedding document chunks into vector space and retrieving those most similar to a query. For the present task, this approach is unsuitable: we know our categories, but we do not know the language used by children of the era across two different languages and cultures. Embedding-based similarity would impose a contemporary model's latent associations onto a corpus where the vocabulary of interest is historically and culturally situated. A 2025-trained model cannot predict what words a Danish child would have used on the internet in 1997. We require a method that applies our categories exhaustively to every document without relying on the model's notion of relevance.
+Retrieval Augmented Generation (RAG) operates by embedding document chunks into a vector space and retrieving those most similar to a query. For the present task, this approach is unsuitable: we know our categories, but we do not know the language used by children of the era across two different languages and cultures. Embedding-based similarity would impose a contemporary model's latent associations onto a corpus where the vocabulary of interest is historically and culturally situated. A 2025-trained model cannot predict what words a Danish child would have used on the internet in 1997. We require a method that applies our categories exhaustively to every document without relying on the model's notion of relevance.
 
 Drawing on database indexing techniques, Ballsun-Stanton proposed building a binary index: a presence/absence classification per document per category, enabling faceted search by deductively identified concepts rather than retrieval by vector similarity. The genesis of this approach was OpenAI's publication of GPT-OSS-Safeguard (https://huggingface.co/openai/gpt-oss-safeguard-120b), an open-weight model that classifies incoming text against developer-defined policies. The same architecture applied to the parent GPT-OSS model could power a classifier based on researcher-defined categories rather than safety policies, drawing on established approaches in multiclass text classification (<cite id="d14sm"><a href="#zotero%7C13014974%2FSY4XQWST">(Walsh &#38; Greaney, 2025)</a></cite>). Huskey (<cite id="4kn4j"><a href="#zotero%7C13014974%2F9JDELNNG">(Huskey, 2025)</a></cite>) demonstrates a comparable pattern in digital humanities: using fine-tuned language models as cost-effective instruments for tedious classification tasks that would otherwise create bottlenecks in the research pipeline.
 
-Rather than filtering or ranking documents by estimated relevance, we generated a full Cartesian product of classifications: every document evaluated against every category. Documented absence is as informative as presence, as a faceted search may both usefully include and exclude items. The task given to the model is narrow in scope: deductively determine whether the document presented matches or does not match the category presented. We constrained all opportunities for the model to apply judgement beyond this scope: no ranking of matches, no interpreting our search terms into associations the model might project onto historical vocabulary. The model provides a search-enabled interface; the researchers do the research.
+Rather than filtering or ranking documents by estimated relevance, we generated a full Cartesian product of classifications: every document evaluated against every category. Documented absence is as informative as presence, as a faceted search may both usefully include and exclude items. The task given to the model is narrow in scope: deductively determine whether the document presented matches or does not match the category presented. We constrained all opportunities for the model to apply judgment beyond this scope: no ranking of matches, no interpreting our search terms into associations the model might project onto historical vocabulary. The model provides a search-enabled interface; the researchers do the research.
 
 This approach reprises the deductive content analysis methodology of Elo and Kyngäs (<cite id="9wzfn"><a href="#zotero%7C13014974%2FDBZ9K4WT">(Elo &#38; Kyngäs, 2008)</a></cite>), in which a categorisation matrix constructed from prior theoretical knowledge is applied systematically to a body of text. The model is constrained by a system prompt that defines its role:
 ```
@@ -352,7 +259,7 @@ Each classification call pairs one document with one category prompt and require
 First, provide your reasoning and analysis. Then, provide ONLY valid JSON with this structure: { "match": "yes" or "maybe" or "no", "blockquotes": ["quote 1", "quote 2"] }
 ```
 
-Requiring reasoning before the verdict is deliberate. By forcing the model to articulate its interpretation of the category before committing to a classification, we produce internal consistency between the analysis and the output using a "Thought Anchor" pattern (<cite id="8cbzy"><a href="#zotero%7C13014974%2F56FTR44T">(Bogdan et al., 2025)</a></cite>). This is distinct from chain-of-thought prompting for problem-solving: the reasoning exists to bind the model to a coherent position, not to discover one. The reasoning traces are preserved in the database, serving additionally as an audit trail and as a means of prompt calibration. We read how the model interpreted category boundaries and refine prompts accordingly. All inference was performed at temperature 0 for deterministic, reproducible classifications.
+Requiring reasoning before the verdict is deliberate. By forcing the model to articulate its interpretation of the category before committing to a classification, we produce internal consistency between the analysis and the output using a "Thought Anchor" pattern (<cite id="8cbzy"><a href="#zotero%7C13014974%2F56FTR44T">(Bogdan et al., 2025)</a></cite>). This is distinct from chain-of-thought prompting for problem-solving: the reasoning exists to bind the model to a coherent position, not to discover one. The reasoning traces are preserved in the database, serving additionally as an audit trail and as a means of prompt calibration. We read how the model interpreted category boundaries and refine prompts accordingly. All inference was performed at temperature 0 to reduce stochastic variation in model outputs. No explicit random seed is supplied, and this configuration does not guarantee identical outputs across repeated runs.
 
 The result is a corpus where every document-category pair has a definitive classification. The extracted blockquotes enable a further step: researchers may make an inductive coding pass on the extracted evidence to support the research question under investigation, building on the deductive scaffold.
 
@@ -364,7 +271,7 @@ The processing architecture evolved iteratively through three approaches. An ini
 
 Crash resilience was a hard operational requirement, not defensive engineering. HPC allocations on UCloud begin with a one-hour walltime and must be manually extended in increments while the machine is running. If the allocation expired, the machine would perform a hard shutdown with no graceful termination signal. The pipeline was therefore designed to survive abrupt power loss: results are written atomically using a temporary-file-then-rename pattern (atomic on POSIX filesystems), and any completed classification that reaches disk survives. On the next allocation, the pipeline resumes from where it stopped. An early attempt to use SQLite's Write-Ahead Logging (WAL) in conjunction with Syncthing for file synchronisation produced corrupted databases, as WAL mode assumes single-filesystem locking semantics. Results were instead written as individual JSON files and imported to SQLite locally after being batched into a JSONL. Documents exceeding 80,000 characters were split at natural boundaries (headings, paragraph breaks) with a 500-character overlap for context continuity. Split parts were processed independently, with results aggregated at the document level: if any part matched, the document was classified as matching. The markdown corpus also contained unconverted binary files (archives, executables, images, and Flash objects), which were detected by file header signatures and excluded before processing.
 
-Correctness of the classifications was established through iterative prompt calibration. Results from an initial run were sampled, and domain experts audited the classifications against source documents. Where the model's judgements diverged from expert assessment, category prompts were refined, and the corpus reprocessed. The 20b variant of GPT-OSS was used for development iteration; all published results were produced with the 120b model, which adhered closely enough to the refined prompts that further calibration was not required at scale. All code for the classification can be found in the [LLM Document Discovery repository](https://github.com/WEB-CHILD/LLM-Document-Discovery){:target="_blank"}
+Correctness of the classifications was established through iterative prompt calibration. Results from an initial run were sampled, and domain experts audited the classifications against source documents. This process is described in the following section. Where the model's judgements diverged from expert assessment, category prompts were refined, and the corpus reprocessed. The 20b variant of GPT-OSS was used for development iteration; all published results were produced with the 120b model, which adhered closely enough to the refined prompts that further calibration was not required at scale. All code for the classification can be found in the [LLM Document Discovery repository](https://github.com/WEB-CHILD/LLM-Document-Discovery){:target="_blank"} (<cite id="i8a2m"><a href="#zotero%7C13014974%2FYBF3A9PZ">(Ballsun-Stanton et al., 2026)</a></cite>).
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
@@ -372,11 +279,13 @@ Correctness of the classifications was established through iterative prompt cali
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"bd7y9": [{"id": "", "source": "zotero"}], "edocn": [{"id": "", "source": "zotero"}], "yukfn": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
-All LLM computation for this project was performed on the UCloud interactive HPC system, which is managed by the eScience Center at the University of Southern Denmark. In this HPC setup we had access to a compute node with two H100 GPUs for 500 hours. We used approximately 100 compute hours in development and approximately 300 to generate this corpus. The computation resulted in more than 130,000 matches between documents and different categories. These category matches were all stored in a local database.
+All LLM computation for this project was performed on the UCloud interactive HPC system, which is managed by the eScience Center at the University of Southern Denmark. In this HPC setup, we had access to a compute node with two H100 GPUs for 500 hours. We used approximately 100 compute hours in development and approximately 300 to generate this corpus. The computation resulted in more than 130,000 matches between documents and different categories. These category matches were all stored in a local database.
 
-After the first run we performed a quality check of the results by sampling ten results for each category adding up to 210 individual documents. These documents were reviewed manually, and the LLM’s reasoning for including them was compared with our close reading. From these samples, it became clear that some categories performed better than others. For instance, initially, we had a category matching  imperative commands directed at the reader, but this extracted many unwanted results. In one case, a Terms of Agreement site from Paramount was put into this category, but it does not nudge the user to interact (<cite id="yukfn"><a href="#zotero%7C13014974%2FVMLLQHSC">(Paramount, 1997)</a></cite>). Other categories performed remarkably better. An example of a well performing category is the category that extracts age identity claims. This category successfully extracted text where children declared their ages (<cite id="edocn"><a href="#zotero%7C13014974%2FULATUTGL">(<i>One Fine Day</i>, 1997)</a></cite>). After the first run categories that did not provide value were removed, while other categories were enhanced to perform better, often when the LLM matched exactly what it had been instructed to, but where the instruction had not been properly demarcated by the authors. An example would be the category related to colour schemes, which was changed from linguistic descriptions of colour to technical descriptions of colour in the source code.
+After the first run, we performed a quality check of the results by sampling ten results for each category, adding up to 210 individual documents. These documents were reviewed manually, and the LLM’s reasoning for including them was compared with our close reading. From these samples, it became clear that some categories performed better than others. For instance, initially, we had a category matching  imperative commands directed at the reader, but this extracted many unwanted results. In one case, a Terms of Agreement site from Paramount was put into this category, but it does not nudge the user to interact (<cite id="yukfn"><a href="#zotero%7C13014974%2FVMLLQHSC">(Paramount, 1997)</a></cite>). Other categories performed remarkably better. An example of a well-performing category is the category that extracts age identity claims. This category successfully extracted text where children declared their ages (<cite id="edocn"><a href="#zotero%7C13014974%2FULATUTGL">(<i>One Fine Day</i>, 1997)</a></cite>). After the first run, categories that did not provide value were removed, while other categories were enhanced to perform better, often when the LLM matched exactly what it had been instructed to, but where the instruction had not been properly demarcated by the authors. An example would be the category related to colour schemes, which was changed from linguistic descriptions of colour to technical descriptions of colour in the source code. 
 
-The individual categories often return a multitude of matches. The real value of the categorisation becomes clear when documents matching multiple categories at once are extracted. In our case we were particularly interested in discovering parts of the web where children were visibly present and active. This could usefully and reliably be extracted by our categories that matched non-standard spelling, age identity claims, and informal youth slang. By querying the database of results for documents that match on all three categories at once, we get 22 results out of the 130.000 in total. 22 results are easily close read but they do not constitute a comprehensive set of sources. To reach a richer and more wide-ranging set of sources different categories must be combined. When results combining categories are close read, it is clear that they were written by children. This approach will be discussed further in the following section, where the method was applied on the bigger Kidlink corpus introduced above.
+The refinement of prompts was, as mentioned, done systematically through random manual sampling of ten documents from each category. If a majority of these documents did not adhere to the research group's understanding of what should have been part of the category, the reasoning behind the classification was analysed. From analysing the reasoning, the description of categories was changed when needed. For instance, category two on explicit mentioning of age by numbers often extracted documents containing sentences with numbers used in other settings. This could be sentences containing percentages, such as "5%", for instance. This category was updated after the first iteration and has been described further. Specifically, we added the sentence "Do not extract numbers in relation to percentages (e.g., "5%") or ratings such as "5 stars"." to the category prompt. Through this approach, we were able to rake out false positives from the classifications before the next run. These initial runs with the small corpus and the 20b variant of GPT-OSS were done twice, and the prompt evaluation was done after both runs. Afterwards, we ran the 120B variant of the model on the Kidlink corpus, this part of the workflow is described in the next section.  
+
+The individual categories produced by our initial runs always return a multitude of matches. The real value of the categorisation becomes clear when documents matching multiple categories at once are extracted. In our case, we were particularly interested in discovering parts of the web where children were visibly present and active. This could usefully and reliably be extracted by our categories that matched non-standard spelling, age identity claims, and informal youth slang. By querying the database of results for documents that match on all three categories at once, we get 22 results out of the 130.000 in total. 22 results are easily close read, but they do not constitute a comprehensive set of sources. To reach a richer and more wide-ranging set of sources, different categories must be combined. When the results combining categories are closely read, it is clear that they were written by children. This approach will be discussed further in the following section, where the method was applied to the bigger Kidlink corpus introduced above.
 
 <!-- #endregion -->
 
@@ -385,7 +294,7 @@ The individual categories often return a multitude of matches. The real value of
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
-As mentioned in the beginning of the [Corpus](#Corpus)-section, the methodology developed has been applied to a corpus consisting of all archived material from the kidlink.org material available at Internet Archive. This corpus consists of more than 380 thousand sources where almost 300 thousand of these are text. For this iteration, we ran the LLM with our updated categories for an extended amount of time on the HPC infrastructure.
+As mentioned at the beginning of the [Corpus](#Corpus) section, the methodology developed has been applied to a corpus consisting of all archived material from the kidlink.org material available on the Internet Archive. This corpus consists of more than 380 thousand sources, where almost 300 thousand of these are text. For this iteration, we ran the LLM with our updated categories for an extended period of time on the HPC infrastructure.
 <!-- #endregion -->
 
 ```python editable=true slideshow={"slide_type": ""} tags=["figure-2"]
@@ -412,7 +321,7 @@ Running the method on this many documents produced a database with more than fiv
 
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
-<!-- #region jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} tags=["table-1"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of mathcing categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
@@ -583,12 +492,12 @@ def main() -> None:
 ```
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-The script can be called from the command line, or its methods can be imported as done below. The example included as part of this article uses the initial test corpus introduced above, consisting of approximately 9000 sources. The categories 2, 5, 7, 8 and 13 are the five in the table above. The results of the example below come from the domains kidpub.org or kidlink.org.
+The script can be called from the command line, or its methods can be imported as shown below. The example included as part of this article uses the initial test corpus introduced above, consisting of approximately 9000 sources. The categories 2, 5, 7, 8 and 13 are the five in the table above. The results of the example below come from the domains kidpub.org or kidlink.org.
 
 When the extraction script was run on the bigger Kidlink corpus, 428 sources were extracted. Among these 428 sources, we have found sources that we have not been able to locate through traditional close reading of the corpus, as it has not been possible to discover them through traditional search interfaces or by navigating the sources in a web archive.
 <!-- #endregion -->
 
-```python editable=true jdh={"module": "object", "object": {"source": ["LABEL TO ADD"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2"]
+```python editable=true jdh={"module": "object", "object": {"source": ["Sources mathcing categories 2, 5, 7, 8 & 13"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2-*"]
 from script.multiple_category_matcher import fetch_matched_results, build_dataframe
 from IPython.display import display, HTML
 import pandas as pd
@@ -605,9 +514,342 @@ df
 ```
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
-As mentioned in the section above the approach has made it possible for us to discover sources from situations where children are interacting differently than was the case in other parts of the Kidlink domain. By categorising each source from the Kidlink domain into our categories we have been able to find material that we did not know existed on the domain. Without an exploratory approach such as the one used here sources that were not easily available through navigation would most likely never have been discovered.
+As mentioned in the section above, the approach has made it possible for us to discover sources from situations where children are interacting differently than was the case in other parts of the Kidlink domain. By categorising each source from the Kidlink domain into our categories, we have been able to find material that we did not know existed on the domain. Without an exploratory approach such as the one used here, sources that were not easily available through navigation would most likely never have been discovered.
 
-One example of such a source is a log from an Internet Relay Chat, which we have only been able to discover through this approach. The landing page of kidlink.org has has a consistent design throughout our period. From the landing page users would be introduced to how they were supposed to participate in Kidlink and they would be guided towards specific parts of the domain. When exploring the archived versions of the domain with the landing page as a starting point, one is left with a one sided narative of primarily educational content. The LLM assisted discovery of source material changes what can be found. By querying our database of categorised sources we were able to find a log from an IRC event, otherwise deeply buried in the sites structure. In this IRC children were chatting with a Bosnian girl who kept a diary during the Bosnian War. This form of direct communication have been almost impossible to find when navigating from the landing page.
+One example of such a source is a log from an Internet Relay Chat, which we have only been able to discover through this approach. The landing page of kidlink.org has had a consistent design throughout our period. From the landing page, users would be introduced to how they were supposed to participate in Kidlink, and they would be guided towards specific parts of the domain. When exploring the archived versions of the domain with the landing page as a starting point, one is left with a one-sided narrative of primarily educational content. The LLM-assisted discovery of source material changes what can be found. By querying our database of categorised sources, we were able to find a log from an IRC event, otherwise deeply buried in the site's structure. In this IRC, children were chatting with a Bosnian girl who kept a diary during the Bosnian War. This form of direct communication has been almost impossible to find when navigating the archived website from the landing page.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+## Validation
+
+As described in [Building document-level binary classifications through inference](#anchor1),
+we chose exhaustive classification over similarity search, asking every
+document the same question for every category, answered yes, maybe, or no,
+and requiring verbatim quotes as evidence. These quotes give us snippets to
+scan when forming our own thematic judgement of a document, and they give
+us a cross-check on the model's judgement as well. Because the model is
+instructed to extract text exactly as it appears and to interpret nothing,
+a faithful quotation must appear in the document it was taken from, and
+every claimed match can be tested against its source.
+
+We tested all 1,633,180 quotations the model produced for the Kidlink
+corpus. Allowing for whitespace and markdown, 89.1 per cent of quotations
+are exact substrings of their source document. Another 10.8 per cent
+differ no more than damaged archiving explains, so 99.9 per cent in all
+are on their page. A further 288 reappear when both quotation and page are
+reduced to bare letters and digits. That leaves 1,198 quotations, or 0.073
+per cent of the total: 168 match nothing on their page, and 1,030 use the
+page's own words in an order we could not find there. At worst, one
+quotation in about fourteen hundred is not on the page it cites.
+
+A stronger model reached over the internet would most likely remove even
+this small residue, but only by moving the children's data off the
+university's own machines, which would be against our data delivery agreement and our ethical framework.
+Working this way limits the size of corpus we can engage with, as
+classifying almost 300 thousand documents against all 21 categories took
+roughly 300 GPU-hours of our allocation, but the trade is speed for control.
+This way, we can be certain that no data left the system, and that the method can be
+rerun end to end within the constraints that inference with large language
+models allows.
+
+The table below breaks this check down by category. A quotation counts as
+grounded when it was found in its source document, allowing for differences
+of whitespace, markdown, and the formatting of links, and as a genuine
+mismatch when it failed every test, including the one that strips all
+formatting away.
+<!-- #endregion -->
+
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Percentage of correct extraction"]}} slideshow={"slide_type": ""} tags=["table-3-*"] -->
+| Category | Quotations | Grounded | Genuine mismatch |
+|----------|-----------:|---------:|-----------------:|
+| explicit_age_child_references | 287,913 | 99.95% | 0.004% |
+| corporate_register_markers | 113,008 | 99.97% | 0.022% |
+| educational_register_markers | 181,834 | 99.94% | 0.022% |
+| non_standard_spelling | 15,151 | 99.92% | 0.026% |
+| syntactic_irregularities | 58,771 | 99.98% | 0.002% |
+| topic_mixing_markers | 73,778 | 99.82% | 0.004% |
+| age_identity_claims | 78,789 | 99.96% | 0.006% |
+| gendered_direct_address | 627 | 99.84% | 0.159% |
+| gendered_activities_objects | 35,136 | 99.97% | 0.011% |
+| interactive_element_text | 76,546 | 99.98% | 0.003% |
+| youth_slang_informality | 22,399 | 99.91% | 0.009% |
+| question_forms | 51,438 | 99.97% | 0.004% |
+| first_person_plural_inclusivity | 142,554 | 99.96% | 0.011% |
+| family | 78,366 | 99.94% | 0.008% |
+| directed_at_kids | 14,665 | 99.97% | 0.020% |
+| fanculture | 10,703 | 99.83% | 0.000% |
+| hobbies | 120,776 | 99.93% | 0.002% |
+| computer_culture | 8,856 | 99.86% | 0.011% |
+| conversations | 29,627 | 99.44% | 0.010% |
+| governed_site | 204,980 | 99.76% | 0.013% |
+| non_governed_site | 27,263 | 99.77% | 0.044% |
+| **Total** | **1,633,180** | **99.91%** | **0.010%** |
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+The grounded share stays above 99.4 per cent in every category, including
+the boilerplate categories such as `governed_site` whose quotations arrive
+wrapped in the markup of menus and footers. The share of genuinely absent
+quotations stays below one in two thousand in every category but the
+smallest, where it is a single mismatched quotation among 627. Reading all
+168 genuine mismatches shows three main kinds, often repeated across
+several crawls of the same page. The largest is translation,
+where the model quotes in English a passage the page carries in Portuguese
+or Danish. The second is plausible boilerplate asserted on near-empty
+pages, a copyright line or a welcome sentence the converted text does not
+contain. The third is description in place of quotation, at its plainest
+in a citation reading "see blockquote 1 above". A few are real page text
+stranded by damaged encoding. These are the model's most deceptive
+outputs, fluent and on-topic yet absent from the page.
+
+The 1,030 quotations that reused the page's words without a placeable
+passage we read more closely, sampling 45 across every category.
+Twenty-five differed from their page only in presentation, as when a
+quotation crosses text the archive interleaved with another language.
+Sixteen joined real passages from different parts of the page without
+marking the joins, most often in chat transcripts, where lines from
+separate speakers or separate sessions can read as one exchange. Four
+condensed, translated, or reassembled the page's words into text that is
+not on the page. Researchers drawing on the conversation categories should
+therefore read a quotation's source before treating it as one passage.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+The check is the `verify` subcommand of the `llm-discovery` package. The
+conversion that produced the corpus interleaves link addresses through the
+page's prose, so each quotation is compared with its source twice, once as
+the page stands and once with markdown link targets stripped, and the
+better reading counts. A first pass looks for the quotation as a substring
+after collapsing whitespace and markdown escapes, and scores the rest with
+a rapidfuzz partial ratio (a fuzzy-matching function that scores how closely 
+a shorter string matches the best-fitting substring within a longer one),
+where 70 out of 100 or better counts as grounded. A second pass takes only the quotations that fail the first,
+reduces quotation and page to lowercase letters and digits with accents and
+Nordic characters folded, and asks whether the quotation reappears as a
+contiguous string, or, failing that, whether at least nine of every ten of
+its words appear on the page. Quotations that pass only that last, weakest
+test are the 1,030 that use the page's words in an order we could not
+find. Running `llm-discovery verify --db corpus.db` reproduces the table
+above, auditing all 1.6 million quotations in under a minute on a
+multi-core machine.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+The pipeline is split into discrete subcommands, each handling one stage 
+from database creation through classification to validation, so that the 
+expensive GPU work is isolated and every step can be run, resumed, or relocated independently.
+ `prep-db` creates the database, loads the category definitions from `prompts/*.yaml`, and loads the
+documents with change detection by SHA-256, splitting any document longer
+than 80,000 characters at paragraph boundaries (adjust this to fit your model's context window). `preflight` excludes
+binary files by their magic bytes and drops pages too short or too garbled
+to classify, before any model time is spent on them. `process` is the
+classification stage described above, streaming document-category pairs to
+the locally served model and writing each verdict crash-safely to its own
+file. `import-results` reads those files into the database idempotently,
+so an interrupted run never duplicates a result. `verify` and `probe` are
+the validation checks reported in this section.
+
+On one machine with a served model, the full sequence is:
+
+```
+llm-discovery prep-db       --db corpus.db --input-dir corpus_md/ --prompts-dir prompts/
+llm-discovery preflight     --db corpus.db
+llm-discovery process       --db corpus.db --server-url http://localhost:8000
+llm-discovery import-results --db corpus.db --input-dir out/
+llm-discovery verify        --db corpus.db
+llm-discovery probe         --db corpus.db
+```
+
+Only `process` needs a GPU, and the validation commands run on any machine
+holding the database. For supercomputer runs the same stages ride inside an
+Apptainer container: `init` stages the container, model weights, and
+environment onto the cluster, `deploy` assembles the data directory,
+uploads it, and submits the batch job, `status --watch` follows the job,
+and `retrieve` brings the finished database home. This path has run on
+Australia's NCI Gadi:
+
+```
+llm-discovery init     --platform gadi --project <code> --gpu-queue gpuhopper
+llm-discovery deploy   --platform gadi --project <code> --gpu-queue gpuhopper
+llm-discovery status   --platform gadi --project <code> --watch
+llm-discovery retrieve --platform gadi --project <code>
+```
+
+The corpus database does not ship with the repository, so these commands
+reproduce the method rather than the data.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+The verifier pass shows that the model's quotations are almost always on
+the page. Whether its classifications are right is a different kind of
+question, because the categories range from the literal to the thematic.
+Whether a page truly addresses children or carries an institutional
+register is a reading, and those we checked by hand during category
+development, sampling ten results for every category of the test corpus and
+comparing the model's reasoning against our own reading of each page, as
+reported above. Six of the 21 categories, though, are defined by their
+surface: a family term, a stated age, a question, a gendered form of
+address, or the first person plural. For these, a genuine positive must
+cite evidence carrying the defining feature, and a positive whose quotes
+carry none can be counted mechanically. The count runs in one direction
+only, catching the over-confident positive. A missed document cannot be
+found the same way, because a keyword search across the corpus returns far
+too much to stand in for a missed classification, so recall is not measured
+here. The expert calibration described in the methodology broadened the
+category prompts toward the corpus's languages, but no ground truth for
+missed documents exists.
+
+For each of the six categories we wrote a deliberately generous necessary
+condition, a set of surface forms that any true member of the category must
+contain. We collected candidate words from the quotes the model cited and
+kept the ones that name the feature in one of the corpus's languages. The
+table below counts, among the positives that cite evidence at all, the
+verdicts whose evidence fails the condition. A positive here counts both
+yes and maybe verdicts, where the discovery queries earlier in the article
+use yes alone.
+<!-- #endregion -->
+
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Categories with positive verdicts"]}} slideshow={"slide_type": ""} tags=["table-4-*"] -->
+| Category | Positives citing evidence | Flagged | Rate |
+|----------|--------------------------:|--------:|-----:|
+| explicit_age_child_references | 149,918 | 3,014 | 2.0% |
+| age_identity_claims | 43,607 | 2,234 | 5.1% |
+| gendered_direct_address | 593 | 4 | 0.7% |
+| question_forms | 21,285 | 50 | 0.2% |
+| first_person_plural_inclusivity | 79,866 | 933 | 1.2% |
+| family | 38,850 | 924 | 2.4% |
+<!-- #endregion -->
+
+Across the six categories the flag rate runs from a quarter of a per cent
+for questions to five per cent for age-identity claims. Reading a sample of
+the flagged quotes, ten from every category, finds two kinds in comparable
+numbers. In one, the model read correctly and the word list was blind,
+because the corpus is multilingual and damaged in archiving: kinship terms
+in Romanian, a question carried by word order rather than a question mark,
+ages written out as words, text split apart as in "B �RN". In the other,
+the model matched words against their sense and the positive is wrong: a
+ceremony "almost eight hundred years old" taken for a person's age, the
+ages of young eagles, a server name read as a kinship term, a statement
+counted as a question. Which kind dominates varies by category, and it
+anticipates the hand-check reported below: for explicit age references
+nearly every flag is the check's blindness, while for age-identity claims
+most flags are the model's error.
+
+The table above leaves out 567 positive verdicts that cited no quote at
+all. We read the stated reasoning for these, and most of them come from the
+same situation. The corpus contains stubs, navigation pages and form
+redirects whose converted text is a couple of hundred characters long,
+where the average document is over eight thousand. Given one of these
+pages, the model often speculated about what such a page would normally
+contain and answered maybe without quoting anything. All but eight of the
+567 verdicts are maybes rather than yes. In the uncleaned counts, which the
+hermeneutic layer shows, gendered direct address stands out with 95 of its
+688 positives citing nothing, but that 95 is close to the 117 for family
+and the 168 for first person plural. The category stands out because
+genuine gendered address is rare in this corpus.
+
+For researchers using the workflow, the lesson is to work with positives
+whose evidence can be checked. The discovery queries earlier in the article
+use only yes verdicts, which already avoids almost all of these cases, and
+dropping every positive without a grounded blockquote removes them
+completely, though it will also drop some true positives. A different
+system prompt might reduce this problem at its source, but we have not
+tested it. We could only make this diagnosis because the
+pipeline stores the model's stated reasoning beside every verdict, and
+reading those statements showed the pattern.
+
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Distribution of claims with backing quote"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-5-*"] -->
+| category                        | positives_total | flagged_total | no_quote |
+|---------------------------------|-----------------|---------------|----------|
+| explicit_age_child_references   | 149970          | 3066          | 52       |
+| age_identity_claims             | 43725           | 2352          | 118      |
+| gendered_direct_address         | 688             | 99            | 95       |
+| question_forms                  | 21302           | 67            | 17       |
+| first_person_plural_inclusivity | 80034           | 1101          | 168      |
+| family                          | 38967           | 1041          | 117      |
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+The check is the `probe` subcommand of the `llm-discovery` package. For
+each of the six categories it holds a necessary condition, a set of surface
+forms that any true member of the category must contain. We built the
+conditions by ranking the words in the quotes the model cited and keeping
+every form that genuinely names the feature, so the family condition holds
+kinship terms in English, Danish, Spanish, Portuguese, Norwegian, and
+Korean among others. A form enters a condition because it is a kinship word
+in some language, never because the model cited it. Matching is done with
+term and text lower-cased, with Danish letters folded so that "Aarhus" and
+"�rhus" agree, and with markdown emphasis treated as a separator. A Latin
+term matches on word boundaries, so that "old" does not match inside
+"gold", while Korean matches as a substring, and the first-person-plural
+condition adds verb-ending patterns for Spanish, Portuguese, and Italian,
+where the pronoun is usually dropped. The command keeps forty flagged
+quotations from each category, and the sample reading reported above drew
+on those. The other fifteen categories are defined by open lists of
+examples, such as the games and bands that stand for computer culture, and
+no closed condition exists for them, so they rest on the expert calibration
+instead. Running `llm-discovery probe --db corpus.db` reproduces the
+uncleaned table above in under a minute.
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+Both checks so far are mechanical, and neither asks whether a yes verdict
+means what a researcher wants it to mean. The quotation readings above were
+made by a language-model assistant working against the database. This last
+check we read ourselves: ten yes verdicts from every category of the
+Kidlink run, 210 documents drawn by a reproducible sample, each judged
+against the category's intent, the same method as the calibration sampling
+reported above. We endorsed 132 of the 210, counting the two we could not
+settle against ourselves. The table below gives the count for each
+category.
+<!-- #endregion -->
+
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Manual check of categorisation"]}} slideshow={"slide_type": ""} tags=["table-6-*"] -->
+| Category | Endorsed of ten |
+|----------|----------------:|
+| explicit_age_child_references | 8 |
+| corporate_register_markers | 10 |
+| educational_register_markers | 10 |
+| non_standard_spelling | 2 |
+| syntactic_irregularities | 2 |
+| topic_mixing_markers | 0 |
+| age_identity_claims | 5 |
+| gendered_direct_address | 6 |
+| gendered_activities_objects | 8 |
+| interactive_element_text | 10 |
+| youth_slang_informality | 7 |
+| question_forms | 9 |
+| first_person_plural_inclusivity | 8 |
+| family | 4 |
+| directed_at_kids | 7 |
+| fanculture | 7 |
+| hobbies | 6 |
+| computer_culture | 4 |
+| conversations | 10 |
+| governed_site | 9 |
+| non_governed_site | 0 |
+<!-- #endregion -->
+
+<!-- #region editable=true slideshow={"slide_type": ""} -->
+The disagreements concentrate where a category's prompt reaches wider than
+its intent. Topic mixing, non-standard spelling, and syntactic
+irregularities ask for surface features that ordinary pages carry for
+unremarkable reasons, and the model returned poetry, recipes, and typing
+errors that satisfy the instruction while missing the point. A smaller
+group are the model's own errors, a reasoning line that repeats itself
+before it settles, or a family term read in the wrong sense. A few rest on
+evidence the model never saw, because the page carried its text inside
+images. Very few are inventions. The model did what we said rather than
+what we wanted, and the categories that name their intent plainly,
+conversations, the register markers, interactive elements, earned ten of
+ten.
+
+The discovery queries reported above do not rest on single categories. The
+IRC and diary examples came from documents positive for five chosen
+categories at once, and an intersection is far more selective than its
+weakest member. The counts above say which categories to trust alone, and
+combining categories recovers precision from noisy components, though
+every added category narrows what can be found.
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
@@ -615,7 +857,11 @@ One example of such a source is a log from an Internet Relay Chat, which we have
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"0n6cm": [{"id": "", "source": "zotero"}], "blxsm": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
-We had 500 hours of HPC allocated for developing the methodology. This amount of HPC has been sufficient for developing the approach. In its current state, the methodology does require a substantial amount of computing power. The following section introduces some challenges and thoughts about how the method can be applied to other corpora and how computing times can be kept down.
+When presenting a methodology as this article does, multiple dimensions of ethics, scalability, and use need to be addressed. This section considers ethical implications when working with source material from web archives and environmental ethical considerations of working with artificial intelligence on HPC clusters.
+
+As researchers working with sources from web archives, we are faced with an ethical responsibility towards our sources. The original producers of the sources might never have thought that their material would be archived, and they often do not know that their websites have been archived. Different approaches to protect the producers of the sources can be taken. One could choose not to include references to the archived sources to keep them safe, as has been done in works on transgender history (<cite id="4tdy8"><a href="#zotero%7C13014974%2FV6WBEJZP">(Dame-Griff, 2023)</a></cite>). Another approach could be to start the exploration of the archives with the producers of the sources and perform what Katie MacKinnon defines as an "archival promenade". This method ensures that only content that the original producers want to forefront gets included in the exploration of the archive (<cite id="3pjvn"><a href="#zotero%7C13014974%2FCIKGZGNV">(Mackinnon, 2022)</a></cite>). When working with the archived web as a source in historical enquiries, it is important to protect the original producer of the source material. However, it is also important to keep a connection between sources and the academic text. The WEBCHILD project has introduced a framework for ethically referencing archived webpages. This whitepaper proposes that URLs to archived webpages are deconstructed, so that the links are not directly clickable in digital publications, but readers would be able to reconstruct the address for a given source (<cite id="snbue"><a href="#zotero%7C13014974%2FTF4II8GI">(Johnston & WEBCHILD Team, 2026)</a></cite>). By introducing a deconstructing approach, the producers of the sources are better protected, while it is still possible to follow the trail of the source material through a bit of extra work. With this ethics of care approach to web archives, the article does not include either the analysed WARC files or the produced database result, as we believe that the children engaged with kidlink.org and other mentioned websites are not to be directly exhibited in this methodological article.   
+
+Another important dimension of this workflow is how well the infrastructure scales. We had 500 hours of HPC allocated for developing the methodology. This amount of HPC has been sufficient for developing the approach. In its current state, the methodology does require a substantial amount of computing power. The following section introduces some challenges and thoughts about how the method can be applied to other corpora and how computing times can be kept down.
 
 During our first run of the method on the initial small test corpus, we spent 81 computing hours with the GPT-OSS-20B model. Our compute times were  significantly reduced by optimisations introduced before a second run, making it feasible to run the larger model GPT-OSS-120B. In fact, the current setup processed our initial test corpus of sources in exactly two hours with the larger GPT-OSS-120B. When we applied the method to our bigger Kidlink corpus, the computation times were higher. Bigger compute times for bigger corpora are not issues in themselves; they, however, emphasise the need for the construction of well-performing categories through test runs on a smaller corpus, before analysing bigger corpora.
 
@@ -623,7 +869,7 @@ The methodology proposed in this article is suitable for working with smaller co
 
 As the proposed method is iterating on the individual documents multiple times, we see a potential issue working with corpora that are of terabytes in size. In our test study above, we ended up with 21 categories, which translates to 21 iterations on each document in the corpus. If one were to define ten categories only, the computation times would effectively be cut in half and so on. 
 
-An example of a larger-scale investigation could be running the method on all the archived web pages from the Danish national web archive from 1995-2005, a corpus comprising 500 million sources. Our first corpus, the nine thousand sources, is only a tiny fraction compared to the material collected in the WEBCHILD project.
+An example of a larger-scale investigation could be running the method on all the archived web pages from the Danish national web archive from 1995 to 2005, a corpus comprising 500 million sources. Our first corpus, the nine thousand sources, is only a tiny fraction compared to the material collected in the WEBCHILD project.
 
 <!-- #endregion -->
 
@@ -640,7 +886,7 @@ percentage_of_total
 <!-- #region editable=true slideshow={"slide_type": ""} -->
 Assuming that the code implementation scales linearly, the classification would need to run 55.556 times longer, resulting in more than twelve years of computing time in a powerful HPC environment. However, this does not mean that the approach cannot be applied at scale. Large-scale implementations would need to think of ways to bring down compute time by either defining fewer and maybe broader categories or using a smaller but still well-performing language model. As researchers, we have a responsibility to make our approaches as efficient as possible for the sake of the environment (<cite id="blxsm"><a href="#zotero%7C13014974%2FDSGN2HJL">(Tamburrini, 2022)</a></cite>). This can be done by either changing some of the parameters for the approach as discussed here. Another approach could be to ensure that the chosen HPC institution relies on green energy sources and uses energy-efficient hardware for the clusters.
 
-Another important environmental consideration is the AI carbon footprint. Concerns relating to AI carbon footprint are often concentrated on the environmental impact of training AI systems (<cite id="0n6cm"><a href="#zotero%7C13014974%2FJMGXMZ79">(He et al., 2025)</a></cite>). However, other reports and articles find that up to 90% of emissions from AI are related to how the systems are used after training (<cite id="blxsm"><a href="#zotero%7C13014974%2FDSGN2HJL">(Tamburrini, 2022)</a></cite>). Kate Crawford has done exhaustive work on how uses of AI should always be seen in a broader environmental context. She speaks of AI as a megamachine drawing on Lewis Mumfords framework: "Artificial intelligence is another kind of megamachine, a set of technological approaches that depends on industrial infrastructures, supply chains, and human labor that stretch around the globe but are kept opaque." (<cite id="yah3e"><a href="#zotero%7C13014974%2FCSKJCUV2">(Crawford, 2021)</a></cite>, 48). Implementing AI solutions should take these impacts into account.
+Another important environmental consideration is the AI carbon footprint. Concerns relating to AI carbon footprint are often concentrated on the environmental impact of training AI systems (<cite id="0n6cm"><a href="#zotero%7C13014974%2FJMGXMZ79">(He et al., 2025)</a></cite>). However, other reports and articles find that up to 90% of emissions from AI are related to how the systems are used after training (<cite id="az74q"><a href="#zotero%7C13014974%2FDSGN2HJL">(Tamburrini, 2022)</a></cite>). Kate Crawford has done exhaustive work on how uses of AI should always be seen in a broader environmental context. She speaks of AI as a megamachine drawing on Lewis Mumfords framework: "Artificial intelligence is another kind of megamachine, a set of technological approaches that depends on industrial infrastructures, supply chains, and human labor that stretch around the globe but are kept opaque." (<cite id="yah3e"><a href="#zotero%7C13014974%2FCSKJCUV2">(Crawford, 2021)</a></cite>, 48). Implementing AI solutions should take these impacts into account.
 
 There are definitely challenges involved when applying our proposed approach at a larger scale. This approach could contribute substantially to the carbon footprint from using AI if applied uncritically at scale. However, this does not mean that the approach cannot produce meaningful results. In fact, as we have demonstrated, the method does a good job at narrowing material for close reading.
 
@@ -650,20 +896,12 @@ There are definitely challenges involved when applying our proposed approach at 
 # Conclusion: document discovery as an alternative to traditional search
 <!-- #endregion -->
 
-Earlier research by Bell et al. showed a great need for alternative approaches to document discovery in web archives due to their vast nature and complicated provenance (<cite id="8dxoz"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>). The method for document discovery outlined in this article has shown both productive and sound results. Tested first on a smaller set of sources (9267) and followed by a large corpus (380.000), we were able to discover websites were kids were visibly present and interacting across both. The way the LLM is used in our document discovery aims at handling one of the biggest challenges in using this technology for research that needs to be both transparent and precise. By having the LLM provide us with quotes from the sources and detailed reasoning why these were chosen as well as the URL of the source, we were able to triple-check the validity of the output. The direct link back to the source enabled us to manually check the model's reasoning and consider if we agreed. Furthermore, the quotes were computationally checked against the source to ensure that they did, in fact, appear on the site. This way of reigning in the probabilistic flaws of the LLM proved useful as we found no signs of so-called hallucination.
-
-As discussed above the method has ethical problems in terms of resources when used at scale. The individual researcher must consider whether the purpose of the research justifies any large-scale use. Small-scale studies as for instance the 380 thousand-item Kidlink corpus is better suited for this method. We could see a future use in smaller web archives where certain collections are of interest to a larger research community, like the UK Web Archive or special collections at the International Internet Preservation Consortium. In these collections, researchers might have overlapping interests and could therefore reuse some of the previous document discoveries.
-
-
-
 <!-- #region editable=true slideshow={"slide_type": ""} -->
-# Notes
-<!-- #endregion -->
+Earlier research by Bell et al. showed a great need for alternative approaches to document discovery in web archives due to their vast nature and complicated provenance (<cite id="t7s62"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>). The method for document discovery outlined in this article has shown both productive and sound results. Tested first on a smaller set of sources (9267) and followed by a large corpus (380.000), we were able to discover websites where kids were visibly present and interacting across both. An example of this was children communicating through an Internet Relay Chat, which we would never have found by navigating through the landing page of the site.
 
-<!-- #region citation-manager={"citations": {"94l0n": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} -->
-[1](#note1): As two of the authors were children in the period that the article is interested in, examples from their childhood were included when constructing the categories. This resembles a postphenomenological approach to using one’s own lived experience. For examples, see: <cite id="94l0n"><a href="#zotero%7C13014974%2F2S7NF3RT">(Ihde, 2010)</a></cite>
-<!-- #endregion -->
+The way the LLM is used in our document discovery aims at handling one of the biggest challenges in using this technology for research that needs to be both transparent and precise. By having the LLM provide us with quotes from the sources and detailed reasoning why these were chosen, as well as the URL of the source, we were able to triple-check the validity of the output. The direct link back to the source enabled us to manually check the model's reasoning and consider if we agreed. Furthermore, the quotes were computationally checked against the source to ensure that they did, in fact, appear on the site. This way of reigning in the probabilistic flaws of the LLM proved useful as we found no signs of so-called hallucination.
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hidden"] -->
+As discussed above, the method has ethical problems in terms of resources when used at scale. The individual researcher must consider whether the purpose of the research justifies any large-scale use. Small-scale studies, such as the 380 thousand-item Kidlink corpus, are better suited for this method. We could see a future use in smaller web archives where certain collections are of interest to a larger research community, like the UK Web Archive or special collections at the International Internet Preservation Consortium. In these collections, researchers might have overlapping interests and could therefore reuse some of the previous document discoveries.
+
 
 <!-- #endregion -->
