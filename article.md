@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.16.6
+      jupytext_version: 1.19.5
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -498,7 +498,6 @@ When the extraction script was run on the bigger Kidlink corpus, 428 sources wer
 <!-- #endregion -->
 
 ```python editable=true jdh={"module": "object", "object": {"source": ["Sources mathcing categories 2, 5, 7, 8 & 13"]}} slideshow={"slide_type": ""} tags=["hermeneutics", "table-2-*"]
-from script.multiple_category_matcher import fetch_matched_results, build_dataframe
 from IPython.display import display, HTML
 import pandas as pd
 
@@ -506,9 +505,12 @@ pd.set_option('display.max_colwidth', 100)
 
 
 categories_to_match = [2, 5, 7, 8, 13]
-matching_results = fetch_matched_results("./script/first_corpus_120b.db", categories_to_match)
 
-df = build_dataframe(matching_results)
+# The script above was run against the full SQLite database and its output
+# saved as a CSV, so this cell is reproducible without the 277 MB database:
+#     python script/multiple_category_matcher.py script/first_corpus_120b.db \
+#         --categories 2 5 7 8 13
+df = pd.read_csv("./script/matched_categories_2_5_7_8_13.csv")
 
 df
 ```
