@@ -561,7 +561,9 @@ def main() -> None:
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 The script can be called from the command line, or its methods can be imported as shown below. The example included as part of this article uses the initial test corpus introduced above, consisting of approximately 9000 sources. The categories 2, 5, 7, 8 and 13 are the five in the table above. The results of the example below come from the domains kidpub.org or kidlink.org.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 When the extraction script was run on the bigger Kidlink corpus, 428 sources were extracted. Among these 428 sources, we have found sources that we have not been able to locate through traditional close reading of the corpus, as it has not been possible to discover them through traditional search interfaces or by navigating the sources in a web archive.
 <!-- #endregion -->
 
