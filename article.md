@@ -171,7 +171,7 @@ What we see in this quote is the centring of a problem-driven approach that can 
 As introduced above, the archived web has seldom been used as a source for historical research. This section presents and explores our methodological approach, which can be seen as an alternative to traditional search in vast collections. The following section presents how the method has been developed and on what material it has been tested. The methodology consists of multiple parts, such as finding test material and creating categories based on domain-specific questions for the document discovery framework.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics", "anchor-corpus"] -->
 ## Corpus
 <!-- #endregion -->
 
@@ -362,7 +362,7 @@ The individual categories produced by our initial runs always return a multitude
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
-As mentioned at the beginning of the [Corpus](#Corpus) section, the methodology developed has been applied to a corpus consisting of all archived material from the kidlink.org material available on the Internet Archive. This corpus consists of more than 380 thousand sources, where almost 300 thousand of these are text. For this iteration, we ran the LLM with our updated categories for an extended period of time on the HPC infrastructure.
+As mentioned at the beginning of the [Corpus](#anchor-corpus) section, the methodology developed has been applied to a corpus consisting of all archived material from the kidlink.org material available on the Internet Archive. This corpus consists of more than 380 thousand sources, where almost 300 thousand of these are text. For this iteration, we ran the LLM with our updated categories for an extended period of time on the HPC infrastructure.
 <!-- #endregion -->
 
 ```python editable=true slideshow={"slide_type": ""} tags=["figure-2"]
@@ -598,7 +598,7 @@ One example of such a source is a log from an Internet Relay Chat, which we have
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
-As described in [Building document-level binary classifications through inference](#anchor-1-binding),
+As described in [building document-level binary classifications through inference](#anchor-1-binding),
 we chose exhaustive classification over similarity search, asking every
 document the same question for every category, answered yes, maybe, or no,
 and requiring verbatim quotes as evidence. These quotes give us snippets to
