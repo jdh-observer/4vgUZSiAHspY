@@ -822,7 +822,7 @@ the flagged quotes, ten from every category, finds two kinds in comparable
 numbers. In one, the model read correctly and the word list was blind,
 because the corpus is multilingual and damaged in archiving: kinship terms
 in Romanian, a question carried by word order rather than a question mark,
-ages written out as words, text split apart as in "B �RN". In the other,
+ages written out as words, text split apart as in "BØRN". In the other,
 the model matched words against their sense and the positive is wrong: a
 ceremony "almost eight hundred years old" taken for a person's age, the
 ages of young eagles, a server name read as a kinship term, a statement
@@ -830,6 +830,7 @@ counted as a question. Which kind dominates varies by category, and it
 anticipates the hand-check reported below: for explicit age references
 nearly every flag is the check's blindness, while for age-identity claims
 most flags are the model's error.
+
 
 The table above leaves out 567 positive verdicts that cited no quote at
 all. We read the stated reasoning for these, and most of them come from the
@@ -843,6 +844,7 @@ hermeneutic layer shows, gendered direct address stands out with 95 of its
 688 positives citing nothing, but that 95 is close to the 117 for family
 and the 168 for first person plural. The category stands out because
 genuine gendered address is rare in this corpus.
+
 
 For researchers using the workflow, the lesson is to work with positives
 whose evidence can be checked. The discovery queries earlier in the article
@@ -875,7 +877,7 @@ kinship terms in English, Danish, Spanish, Portuguese, Norwegian, and
 Korean among others. A form enters a condition because it is a kinship word
 in some language, never because the model cited it. Matching is done with
 term and text lower-cased, with Danish letters folded so that "Aarhus" and
-"�rhus" agree, and with markdown emphasis treated as a separator. A Latin
+"Århus" agree, and with markdown emphasis treated as a separator. A Latin
 term matches on word boundaries, so that "old" does not match inside
 "gold", while Korean matches as a substring, and the first-person-plural
 condition adds verb-ending patterns for Spanish, Portuguese, and Italian,
