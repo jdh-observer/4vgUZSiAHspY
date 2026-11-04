@@ -773,51 +773,6 @@ The corpus database does not ship with the repository, so these commands
 reproduce the method rather than the data.
 <!-- #endregion -->
 
-<!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-The pipeline is split into discrete subcommands, each handling one stage 
-from database creation through classification to validation, so that the 
-expensive GPU work is isolated and every step can be run, resumed, or relocated independently.
- `prep-db` creates the database, loads the category definitions from `prompts/*.yaml`, and loads the
-documents with change detection by SHA-256, splitting any document longer
-than 80,000 characters at paragraph boundaries (adjust this to fit your model's context window). `preflight` excludes
-binary files by their magic bytes and drops pages too short or too garbled
-to classify, before any model time is spent on them. `process` is the
-classification stage described above, streaming document-category pairs to
-the locally served model and writing each verdict crash-safely to its own
-file. `import-results` reads those files into the database idempotently,
-so an interrupted run never duplicates a result. `verify` and `probe` are
-the validation checks reported in this section.
-
-On one machine with a served model, the full sequence is:
-
-```
-llm-discovery prep-db       --db corpus.db --input-dir corpus_md/ --prompts-dir prompts/
-llm-discovery preflight     --db corpus.db
-llm-discovery process       --db corpus.db --server-url http://localhost:8000
-llm-discovery import-results --db corpus.db --input-dir out/
-llm-discovery verify        --db corpus.db
-llm-discovery probe         --db corpus.db
-```
-
-Only `process` needs a GPU, and the validation commands run on any machine
-holding the database. For supercomputer runs the same stages ride inside an
-Apptainer container: `init` stages the container, model weights, and
-environment onto the cluster, `deploy` assembles the data directory,
-uploads it, and submits the batch job, `status --watch` follows the job,
-and `retrieve` brings the finished database home. This path has run on
-Australia's NCI Gadi:
-
-```
-llm-discovery init     --platform gadi --project <code> --gpu-queue gpuhopper
-llm-discovery deploy   --platform gadi --project <code> --gpu-queue gpuhopper
-llm-discovery status   --platform gadi --project <code> --watch
-llm-discovery retrieve --platform gadi --project <code>
-```
-
-The corpus database does not ship with the repository, so these commands
-reproduce the method rather than the data.
-<!-- #endregion -->
-
 <!-- #region editable=true slideshow={"slide_type": ""} -->
 The verifier pass shows that the model's quotations are almost always on
 the page. Whether its classifications are right is a different kind of
@@ -837,7 +792,9 @@ too much to stand in for a missed classification, so recall is not measured
 here. The expert calibration described in the methodology broadened the
 category prompts toward the corpus's languages, but no ground truth for
 missed documents exists.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 For each of the six categories we wrote a deliberately generous necessary
 condition, a set of surface forms that any true member of the category must
 contain. We collected candidate words from the quotes the model cited and
