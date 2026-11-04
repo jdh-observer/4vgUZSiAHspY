@@ -941,7 +941,9 @@ images. Very few are inventions. The model did what we said rather than
 what we wanted, and the categories that name their intent plainly,
 conversations, the register markers, interactive elements, earned ten of
 ten.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 The discovery queries reported above do not rest on single categories. The
 IRC and diary examples came from documents positive for five chosen
 categories at once, and an intersection is far more selective than its
