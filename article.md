@@ -683,7 +683,9 @@ contain. The third is description in place of quotation, at its plainest
 in a citation reading "see blockquote 1 above". A few are real page text
 stranded by damaged encoding. These are the model's most deceptive
 outputs, fluent and on-topic yet absent from the page.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 The 1,030 quotations that reused the page's words without a placeable
 passage we read more closely, sampling 45 across every category.
 Twenty-five differed from their page only in presentation, as when a
