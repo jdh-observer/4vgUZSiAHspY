@@ -595,7 +595,9 @@ One example of such a source is a log from an Internet Relay Chat, which we have
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
 ## Validation
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 As described in [Building document-level binary classifications through inference](#anchor-1-binding),
 we chose exhaustive classification over similarity search, asking every
 document the same question for every category, answered yes, maybe, or no,
@@ -605,7 +607,9 @@ us a cross-check on the model's judgement as well. Because the model is
 instructed to extract text exactly as it appears and to interpret nothing,
 a faithful quotation must appear in the document it was taken from, and
 every claimed match can be tested against its source.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 We tested all 1,633,180 quotations the model produced for the Kidlink
 corpus. Allowing for whitespace and markdown, 89.1 per cent of quotations
 are exact substrings of their source document. Another 10.8 per cent
@@ -615,7 +619,9 @@ reduced to bare letters and digits. That leaves 1,198 quotations, or 0.073
 per cent of the total: 168 match nothing on their page, and 1,030 use the
 page's own words in an order we could not find there. At worst, one
 quotation in about fourteen hundred is not on the page it cites.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 A stronger model reached over the internet would most likely remove even
 this small residue, but only by moving the children's data off the
 university's own machines, which would be against our data delivery agreement and our ethical framework.
@@ -625,7 +631,9 @@ roughly 300 GPU-hours of our allocation, but the trade is speed for control.
 This way, we can be certain that no data left the system, and that the method can be
 rerun end to end within the constraints that inference with large language
 models allows.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 The table below breaks this check down by category. A quotation counts as
 grounded when it was found in its source document, allowing for differences
 of whitespace, markdown, and the formatting of links, and as a genuine
