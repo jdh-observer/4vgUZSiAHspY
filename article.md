@@ -1012,10 +1012,12 @@ There are definitely challenges involved when applying our proposed approach at 
 
 <!-- #region editable=true slideshow={"slide_type": ""} -->
 Earlier research by Bell et al. showed a great need for alternative approaches to document discovery in web archives due to their vast nature and complicated provenance (<cite id="t7s62"><a href="#zotero%7C13014974%2FU4NRYK6X">(Bell et al., 2022)</a></cite>). The method for document discovery outlined in this article has shown both productive and sound results. Tested first on a smaller set of sources (9267) and followed by a large corpus (380.000), we were able to discover websites where kids were visibly present and interacting across both. An example of this was children communicating through an Internet Relay Chat, which we would never have found by navigating through the landing page of the site.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 The way the LLM is used in our document discovery aims at handling one of the biggest challenges in using this technology for research that needs to be both transparent and precise. By having the LLM provide us with quotes from the sources and detailed reasoning why these were chosen, as well as the URL of the source, we were able to triple-check the validity of the output. The direct link back to the source enabled us to manually check the model's reasoning and consider if we agreed. Furthermore, the quotes were computationally checked against the source to ensure that they did, in fact, appear on the site. This way of reigning in the probabilistic flaws of the LLM proved useful as we found no signs of so-called hallucination.
+<!-- #endregion -->
 
+<!-- #region editable=true slideshow={"slide_type": ""} -->
 As discussed above, the method has ethical problems in terms of resources when used at scale. The individual researcher must consider whether the purpose of the research justifies any large-scale use. Small-scale studies, such as the 380 thousand-item Kidlink corpus, are better suited for this method. We could see a future use in smaller web archives where certain collections are of interest to a larger research community, like the UK Web Archive or special collections at the International Internet Preservation Consortium. In these collections, researchers might have overlapping interests and could therefore reuse some of the previous document discoveries.
-
-
 <!-- #endregion -->
