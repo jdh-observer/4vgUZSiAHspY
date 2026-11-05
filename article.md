@@ -241,7 +241,7 @@ We are interested in exploring and interpreting sources that can help us answer 
 
 <!-- #endregion -->
 
-```python editable=true slideshow={"slide_type": ""} tags=["hermeneutics"]
+<!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 id: 2
 name: explicit_age_child_references
 description: Direct mentions of ages 5-17 or child-related terms
@@ -252,9 +252,9 @@ prompt: |
   Do not extract numbers in relation to percentages (e.g., "5%") or ratings such as "5 stars".
 
   Analyze the following document and extract matching passages:
-```
+<!-- #endregion -->
 
-```python editable=true raw_mimetype="" slideshow={"slide_type": ""} tags=["hermeneutics"]
+<!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 id: 6
 name: syntactic_irregularities
 description: Fragments, missing punctuation/capitalization
@@ -266,7 +266,7 @@ prompt: |
   - Are fragments without subjects or verbs
 
   Analyze the following document and extract matching passages:
-```
+<!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"5frso": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
 Each topic contains a prompt for the LLM. This prompt is central to making the LLM understand what it should look for in the sources. The process of creating categories for the LLM is where domain expertise is essential. The categories for this article have been constructed from close readings of a vast number of newspapers from the period, Internet guidebooks for children, secondary literature, other media, and the archived web itself. The categories have been constructed from months of working with sources in and around the corpus. The close reading of the sources and other contextual works makes the produced categories more relevant, as we have learned through the close readings what is of interest in the corpus (<cite id="5frso"><a href="#zotero%7C13014974%2F4T525T4G">(Ohrvik, 2024)</a></cite>). Additionally, some of the categories have been enhanced with informal knowledge from lived experience (as two of the authors were children in the period that the article is interested in, examples from their childhood were included when constructing the categories. This resembles a postphenomenological approach to using one’s own lived experience. For examples, see: (<cite id="94l0n"><a href="#zotero%7C13014974%2F2S7NF3RT">(Ihde, 2010)</a></cite>).
@@ -384,7 +384,7 @@ Running the method on this many documents produced a database with more than fiv
 
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
-<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of mathcing categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of matching categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
