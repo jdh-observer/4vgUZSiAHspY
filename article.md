@@ -252,7 +252,8 @@ prompt: |
 
   Do not extract numbers in relation to percentages (e.g., "5%") or ratings such as "5 stars".
 
-  Analyze the following document and extract matching passages:```
+  Analyze the following document and extract matching passages:
+```
 <!-- #endregion -->
 
 <!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
@@ -267,7 +268,8 @@ prompt: |
   - Contain multiple punctuation marks: "!!!", "???", "!?!?"
   - Are fragments without subjects or verbs
 
-  Analyze the following document and extract matching passages:```
+ Analyze the following document and extract matching passages:
+```
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"5frso": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
