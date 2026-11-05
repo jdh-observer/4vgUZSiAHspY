@@ -242,6 +242,7 @@ We are interested in exploring and interpreting sources that can help us answer 
 <!-- #endregion -->
 
 <!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+```
 id: 2
 name: explicit_age_child_references
 description: Direct mentions of ages 5-17 or child-related terms
@@ -251,10 +252,11 @@ prompt: |
 
   Do not extract numbers in relation to percentages (e.g., "5%") or ratings such as "5 stars".
 
-  Analyze the following document and extract matching passages:
+  Analyze the following document and extract matching passages:```
 <!-- #endregion -->
 
 <!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
+```
 id: 6
 name: syntactic_irregularities
 description: Fragments, missing punctuation/capitalization
@@ -265,7 +267,7 @@ prompt: |
   - Contain multiple punctuation marks: "!!!", "???", "!?!?"
   - Are fragments without subjects or verbs
 
-  Analyze the following document and extract matching passages:
+  Analyze the following document and extract matching passages:```
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"5frso": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
