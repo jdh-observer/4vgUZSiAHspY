@@ -242,7 +242,7 @@ We are interested in exploring and interpreting sources that can help us answer 
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-```
+```yaml
 id: 2
 name: explicit_age_child_references
 description: Direct mentions of ages 5-17 or child-related terms
@@ -253,10 +253,11 @@ prompt: |
   Do not extract numbers in relation to percentages (e.g., "5%") or ratings such as "5 stars".
 
   Analyze the following document and extract matching passages:
+```
 <!-- #endregion -->
 
 <!-- #region editable=true raw_mimetype="" slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-```
+```yaml
 id: 6
 name: syntactic_irregularities
 description: Fragments, missing punctuation/capitalization
@@ -268,6 +269,7 @@ prompt: |
   - Are fragments without subjects or verbs
 
   Analyze the following document and extract matching passages:
+```
 <!-- #endregion -->
 
 <!-- #region citation-manager={"citations": {"5frso": [{"id": "", "source": "zotero"}]}} editable=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
@@ -295,7 +297,7 @@ This approach reprises the deductive content analysis methodology of Elo and Kyn
 <!-- #endregion -->
 
 <!-- #region editable=true jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["hermeneutics"] -->
-```
+```yaml
 You are a text extraction tool for historical web research. You extract verbatim blockquotes from 1996-2005 web pages that contain specific linguistic or structural features.
 
 You make no interpretive judgments about intent or audience. You only identify and extract text containing specified patterns.
@@ -386,7 +388,7 @@ Running the method on this many documents produced a database with more than fiv
 
 When working with results of this magnitude, we need to filter the results meaningfully to answer our questions. In this approach, we are filtering for sources that match multiple categories we have deemed interesting when combined. For instance, we were interested in sources that matched the following five categories at once: 
 
-<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of mathcing categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
+<!-- #region editable=true jdh={"module": "object", "object": {"source": ["Example of matching categories"]}} slideshow={"slide_type": ""} tags=["table-1-*"] -->
 | Category name                 | Description |
 |-------------------------------|-------------|
 | explicit_age_child_references | Direct mentions of ages 5-17 or child-related terms|
