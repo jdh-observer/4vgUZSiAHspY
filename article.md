@@ -33,7 +33,7 @@ Aarhus University
 <!-- #endregion -->
 
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["contributor"] -->
-### Christian Kaalund  Kjelsen [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/ORCID_ID_IF_EXIST) 
+### Christian Kaalund  Kjelsen [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0009-0005-7798-4911) 
 Aarhus University
 <!-- #endregion -->
 
