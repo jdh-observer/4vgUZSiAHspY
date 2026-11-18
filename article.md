@@ -22,18 +22,23 @@ jupyter:
 Aarhus University
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": ""} tags=["contributor"] -->
-### Brian  Ballsun-Stanton [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-4932-7912) 
-Macquarie University
-<!-- #endregion -->
-
 <!-- #region jp-MarkdownHeadingCollapsed=true slideshow={"slide_type": ""} tags=["contributor"] -->
 ### Helle Strandgaard  Jensen [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0002-8623-9586) 
 Aarhus University
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": ""} tags=["contributor"] -->
+### Brian  Ballsun-Stanton [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0003-4932-7912) 
+Macquarie University
+<!-- #endregion -->
+
 <!-- #region editable=true slideshow={"slide_type": ""} tags=["contributor"] -->
-### Christian Kaalund  Kjelsen [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/ORCID_ID_IF_EXIST) 
+### Christian Kaalund  Kjelsen [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0009-0005-7798-4911) 
+Aarhus University
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": ""} tags=["contributor"] -->
+### Jørn  Thøgersen [![orcid](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0009-0000-8837-1057) 
 Aarhus University
 <!-- #endregion -->
 
